@@ -1,0 +1,240 @@
+<?php
+	class Worker extends CI_Controller{
+		
+
+	public function form(){	
+			//Check login
+			 if(!$this->session->userdata('logged_in_1')){
+			 	$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+			 	redirect('users/login');
+			 }
+			 
+			$data['title'] = 'إضافة معلومات العاملين' ;
+			//$data['file']  = $this->property_model->get_files();
+	     	//to check if get from database working ---- you can use print_r($data['posts']);
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/worker', $data);
+			$this->load->view('templates/footer');
+		}
+	
+	public function create(){
+	   	
+	        $data['title'] = 'إضافة عامل';
+	  //      $this->form_validation->set_rules('title', 'Title', 'required');
+			$this->form_validation->set_rules('name', 'Name', 'required');
+			if($this->form_validation->run() === FALSE){
+	        	$this->load->view('templates/header', $data);
+				$this->load->view('pages/worker', $data);
+				$this->load->view('templates/footer');
+			}else {
+    
+						$this->worker_model->create_worker();
+			
+		         	// Upload Image
+						$config['upload_path'] = './assets/images/posts';
+						$config['allowed_types'] = 'gif|jpg|png';
+						$config['max_size'] = '20480';// 20 MB
+						$config['max_width'] = '9000';
+						$config['max_height'] = '9000';
+						$this->load->library('upload', $config);
+						
+						
+						$worker_id =	$this->db->insert_id('worker.id');
+						
+						if($this->upload->do_upload('f1')  ){
+							$data = array('upload_data' => $this->upload->data());
+							$post_image =$this->upload->data('file_name');
+							$default = 'def';
+							$this->worker_model->create_file($post_image,$worker_id,$default);
+						}
+					
+						//if(!$this->upload->do_upload('f1') && !$this->upload->do_upload('f2')){
+						else{
+							$errors = array('error' => $this->upload->display_errors());
+							
+					    //    $this->session->set_flashdata('post_created',$errors['error']);//post_updated is an id for the message
+					
+							$post_noimage = 'noimage.jpg';
+							$default = 'noimg';
+							$this->worker_model->create_file($post_noimage,$worker_id,$default);
+				
+						}
+						
+						 	// Set message
+							$this->session->set_flashdata('post_created', 'Your post has been created');
+	
+			
+							redirect('worker/form');
+					}
+				}
+				
+		public function main(){	
+				//Check login
+			 if(!$this->session->userdata('logged_in_1')){
+			 	$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+			 	redirect('users/login');
+			 }
+			$data['title'] = 'This is Main Property page'.'<br>';
+			$data['posts'] = $this->worker_model->get_workers() ;
+		
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/workerview', $data);
+			$this->load->view('templates/footer');
+		}
+	
+		public function view($id = NULL ,$slug = NULL){
+			$data['post'] = $this->worker_model->get_worker($id);
+				$post_id = $data['post']['id'];
+			$data['files'] = $this->worker_model->get_files($post_id);
+		//	print_r($data['files']);die();
+		//	$data['comments'] = $this->comment_model->get_comments($post_id);
+			if(empty($data['post'])){
+				//show_404();
+				$this->session->set_flashdata('post_updated', 'no post');//post_updated is an id for the message
+				redirect('worker/main');
+			}
+			$data['title'] = $data['post']['name'];
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/workerviewone', $data);
+			$this->load->view('templates/footer');
+		}
+		
+		public function delete($p_id){
+				$files = $this->worker_model->get_files($p_id);
+				foreach($files as $file) : 
+					 $path_to_file = './assets/images/posts/'.$file['file'] ;
+					 if($file['file'] != 'noimage.jpg'){
+					 	unlink($path_to_file);
+					 }
+				endforeach; 
+				$delete = $this->worker_model->delete_worker($p_id) ; 
+			 	if($delete){
+			 		$this->session->set_flashdata('category_deleted', 'has been deleted');
+					redirect('worker/view/'.$p_id);
+			 	}else{
+			 		$this->session->set_flashdata('category_deleted', 'not deleted');
+					redirect('pages/workerviewone/'.$p_id);
+			 	}
+			 
+		}
+		
+		public function edit($id){
+				//Check login
+			// if(!$this->session->userdata('logged_in_1')){
+			// 	redirect('users/login');
+			// }
+			
+			$data['post'] = $this->worker_model->get_worker($id);
+		//	$data['postid'] = $this->post_model->get_posts_by_id($id,'categories.id');
+		// echo $data['post']['title']; 
+		// echo $this->post_model->get_posts_by_id($id)['posts_id'].'<br>';
+		// echo  $this->post_model->get_posts_by_id($id)['posts_user_id'];
+		// die ();
+			//Check user
+			// if($this->session->userdata('user_id') !=  $this->post_model->get_posts_by_id($id)['posts_user_id']){
+			// 	redirect('posts');
+			// }
+		
+			$data['files'] = $this->worker_model->get_files($id);
+			if(empty($data['post'])){
+				show_404();
+			}
+			$data['title'] = 'Edit Post';
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/workeredit', $data);
+			$this->load->view('templates/footer');
+		}
+		
+		public function update(){
+				//	echo 'SUBMITED';
+			//Check login
+			// if(!$this->session->userdata('logged_in_1')){
+			// 	redirect('users/login');
+			// }
+		//	echo $this->input->post('country') ; die() ;
+			$post_id = $this->input->post('id');
+			// if(!$this->input->post('condetion')){
+			// 	 $this->session->set_flashdata('post_updated', 'condetion please');//post_updated is an id for the message
+			// 	redirect('property/edit/'.$post_id.'/#condetion');
+			// }
+			$this->worker_model->update_worker();
+        
+            $this->session->set_flashdata('post_updated', 'Your post has been updated');//post_updated is an id for the message
+			redirect('worker/view/'.$post_id);
+		}
+	
+	
+		public function add_file(){
+				$post_id = $this->input->post('id');
+				
+				$config['upload_path'] = './assets/images/posts';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['max_size'] = '20480';
+				$config['max_width'] = '9000';
+				$config['max_height'] = '9000';
+				$this->load->library('upload', $config);
+				
+					$files = $this->worker_model->get_files($post_id);
+				if(count($files) > 5){
+			 		$this->session->set_flashdata('post_updated', 'You can not Add more');//post_updated is an id for the message
+					redirect('worker/edit/'.$post_id);
+			 	}
+			 	
+				if($this->upload->do_upload('morefile')  ){
+					
+					$data = array('upload_data' => $this->upload->data());
+					$post_image = $this->upload->data('file_name');
+					$default = 'notdef';
+					$this->worker_model->create_file($post_image,$post_id,$default);
+				
+				//to delete the name of noimage.jpg after adding file
+				 if( $this->worker_model->get_file($post_id)['file'] == 'noimage.jpg'){
+				 		$file = $this->worker_model->get_file($post_id);
+				 		$fid = $file['f_id'];
+				 		$this->worker_model->delete_file($fid);
+				 	}
+				 	
+					$this->session->set_flashdata('post_updated', 'Your post has been added');//post_updated is an id for the message
+					redirect('worker/edit/'.$post_id);
+				}else{
+					 $error = array('error' => $this->upload->display_errors());
+					 $this->session->set_flashdata('post_updated',$error['error']);//post_updated is an id for the message
+					redirect('worker/edit/'.$post_id);
+				}
+	   //         $this->session->set_flashdata('post_updated', 'Your post has been added');//post_updated is an id for the message
+				// redirect('property/view/'.$post_id);
+		}
+		
+		
+		
+		public function delete_file($id){
+			$post_id = $this->worker_model->get_worker_toDeleteFile($id)->worker_id;
+			$file_name = $this->worker_model->get_worker_toDeleteFile($id)->file;
+			$file_default = $this->worker_model->get_worker_toDeleteFile($id)->default;
+			 if( $file_name == "noimage.jpg"){
+					$this->session->set_flashdata('category_deleted', 'can not delete this image you can only Add New');
+					redirect('worker/edit/'.$post_id);
+			 }else{
+			 	$files = $this->worker_model->get_files($post_id);
+			 	if(count($files) > 1){
+			 		$path_to_file = './assets/images/posts/'.$file_name ;
+					unlink($path_to_file);
+					$this->worker_model->delete_file($id);
+			 	}
+			 	if(count($files) == 1){
+			 		$file = $this->worker_model->get_file($post_id);
+			 		$fid = $file['id'];
+			 		$fname =  "noimage.jpg";
+			 		$default = "noimg";
+			 		$this->worker_model->update_file($fid,$fname,$default);
+			 		$path_to_file = './assets/images/posts/'.$file_name ;
+					unlink($path_to_file);
+			 	}
+			 	$this->session->set_flashdata('category_deleted', 'img has been deleted');
+					redirect('worker/edit/'.$post_id);
+			 }
+		}
+	   
+		
+	}
