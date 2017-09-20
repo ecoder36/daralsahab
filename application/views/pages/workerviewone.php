@@ -1,13 +1,48 @@
-<a class="btn btn-default pull-right" href="<?php echo base_url(); ?>worker/edit/<?php echo $post['id']; ?>">Edit</a>
-<a class="btn-link text-danger pull-right" href="<?php echo base_url(); ?>worker/delete/<?php echo $post['id']; ?>">Delete</a>
 
-<h2><?php echo $post['id']; ?><?php echo $post['name']; ?></h2>
+<script type="text/javascript" class="init">
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "order": [[ 4, "desc" ]],
+        "columnDefs": [
+            {
+                "targets": [ 4 ],
+                "visible": false,
+                "searchable": false
+            },
+            ]
+    } );
+} );
+</script>
 
-<small class="post-date">Posted on: <?php echo $post['created_at']; ?></small><br>
+<table id="example" class="display" cellspacing="0" width="100%" dir="rtl">
+        <thead>
+            <tr>
+                <th>الاسم</th>
+                <th>الجوال</th>
+                <th>رقم العامل</th>
+                <th>تاريخ البطاقة</th>
+                <th>تاريخ الانشاء</th>
+                <th>الصورة</th>
+                <th>المزيد</th>
+            </tr>
+        </thead>
+        <tbody>
+        	<tr>
+                <td><?php echo $post['name']; ?></td>
+                <td><?php echo $post['mobile']; ?></td>
+                <td><?php echo $post['workerID']; ?></td>
+                <td><?php echo $post['idDate']; ?></td>
+                <td><?php echo $post['created_at']; ?></td>
+                <td><a class="btn btn-default pull-right" href="<?php echo base_url(); ?>worker/edit/<?php echo $post['id']; ?>">Edit</a></td>
+                <td><a class="btn-link text-danger pull-right" href="<?php echo base_url(); ?>worker/delete/<?php echo $post['id']; ?>">Delete</a></td>
+            </tr>
+           
 
-<div class="post-body">
-	<?php echo $post['name']; ?>
-</div>
+        </tbody>
+    </table>
+
+
+
 
 
 <!--Images -->

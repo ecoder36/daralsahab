@@ -1,8 +1,52 @@
 <?php
 	class Worker extends CI_Controller{
 		
+		public function sms(){	
+			$this->load->view('templates/header', @$data);
+			$this->load->view('sms/form', @$data);
+			$this->load->view('templates/footer');
+			}
+			
+		public function mail(){	
+				// $config = Array(
+		// 	'smtp_host' => 'smtp.gmail.com',
+		// 	'smtp_port' =>  587 ,
+		// 	'smtp_user' => 'sultanzagzoog@gmail.com',
+		// 	'smtp_pass' => 'Admin!23',
+		// 	'smtp_crypto' => 'tls'
+		// 	);
+			
+		
+	//	$this->email->initialize($config);
+		//	$this->load->library('email',$config);
+			$this->load->library('email');
+			$this->email->set_newline("\r\n");
+			
+			$this->email->from('sultan.zagzoog@gmail.com', 'Your Name');
+			$this->email->to('sultan.zagzoog@gmail.com');
+			//$this->email->cc('another@another-example.com');
+			//$this->email->bcc('them@their-example.com');
+			
+			$this->email->subject('Email Test');
+			$this->email->message('Testing the email class.');
+			
+		//	$path = $this->config->item('server_root');
+			
+			$mail = $this->email->send();
+			
+			if($mail){
+				echo "success";
+			}else{
+				show_error($this->email->print_debugger());
+				echo "failur";
+			}
+die();
+
+			}
 
 	public function form(){	
+		
+	
 			//Check login
 			 if(!$this->session->userdata('logged_in_1')){
 			 	$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
@@ -61,7 +105,7 @@
 						}
 						
 						 	// Set message
-							$this->session->set_flashdata('post_created', 'Your post has been created');
+							$this->session->set_flashdata('success', 'تم الحفظ بنجاح');
 	
 			
 							redirect('worker/form');
@@ -84,6 +128,11 @@
 		}
 	
 		public function view($id = NULL ,$slug = NULL){
+				//Check login
+			 if(!$this->session->userdata('logged_in_1')){
+			 	$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+			 	redirect('users/login');
+			 }
 			$data['post'] = $this->worker_model->get_worker($id);
 				$post_id = $data['post']['id'];
 			$data['files'] = $this->worker_model->get_files($post_id);
@@ -101,6 +150,11 @@
 		}
 		
 		public function delete($p_id){
+				//Check login
+			 if(!$this->session->userdata('logged_in_1')){
+			 	$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+			 	redirect('users/login');
+			 }
 				$files = $this->worker_model->get_files($p_id);
 				foreach($files as $file) : 
 					 $path_to_file = './assets/images/posts/'.$file['file'] ;
@@ -110,10 +164,10 @@
 				endforeach; 
 				$delete = $this->worker_model->delete_worker($p_id) ; 
 			 	if($delete){
-			 		$this->session->set_flashdata('category_deleted', 'has been deleted');
+			 		$this->session->set_flashdata('success', 'تم الحذف بنجاح');
 					redirect('worker/view/'.$p_id);
 			 	}else{
-			 		$this->session->set_flashdata('category_deleted', 'not deleted');
+			 		$this->session->set_flashdata('danger', 'خطأ ! لم يتم الحذف');
 					redirect('pages/workerviewone/'.$p_id);
 			 	}
 			 

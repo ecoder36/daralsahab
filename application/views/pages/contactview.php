@@ -1,49 +1,50 @@
 
 
-
+<script type="text/javascript" class="init">
+    $(document).ready(function() {
+        $('#example').DataTable( {
+            "order": [[ 0, "desc" ]],
+            "columnDefs": [
+                {
+                 //   "targets": [ 0 ],
+                    "visible": false,
+                    "searchable": false
+                },
+                ]
+        } );
+    } );
+</script>
+<table id="example" class="display" cellspacing="0" width="100%" dir="rtl">
+        <thead>
+            <tr>
+                <th>الرقم </th>
+                <th>الاسم </th>
+                <th>الايميل </th>
+                <th> الجوال </th>
+                <th>الرسالة  </th>
+                <th> قراءة المزيد  </th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
 
 <?php foreach($posts as $contact) : ?>
-	<div class="row">
-	 
-		<div class="col-md-8 ">
-			<small class="post-date">
-				<?php 
-				// 	$bd = $property['created_at'] ;$now = Date('d-m-Y H:i:s') ; 
-    //                 $datetime1 = new DateTime($bd);$datetime2 = new DateTime($now);
-    //                 $interval55 = $datetime1->diff($datetime2);
-    //                 $since = $interval55->format('%a Days %h Hours %i Minute ');
-                ?>
-				<strong><?php echo $contact['name']; ?></strong> 
-				Posted Since : <?php // echo $since ; ?> 
-				<div class="pull-right">
-					 
-					<!--for Admin-->
-				<br>	<a class="btn-link text-danger" href="<?php echo base_url(); ?>contact/delete/<?php echo $contact['id']; ?>">[ X ]</a>
-				
+                <tr>
+                    <td><?php echo $contact['id']; ?> </td>
+                    <td><?php echo $contact['name']; ?></td>
+                    <td><?php echo $contact['mail']; ?></td>
+                    <td><?php echo $contact['mobile']; ?></td>
+                    <td><?php echo word_limiter($contact['message'], 10); ?></td>
+                    <td>
+                    <a class="btn btn-default btn-sm" href=" <?php echo base_url(); ?>contact/view/<?php echo $contact['id']; 
+		// echo base_url('/contact/view/'.$contact['id'].'/'.url_title(mb_substr($contact['massege'], 0, 29))); ?>">Read More </a></td>
+                    <td>
+                    <!--for Admin-->
+					<a class="btn-link text-danger" href="<?php echo base_url(); ?>contact/delete/<?php echo $contact['id']; ?>">[ X ]</a>
 					<!--end for Admin-->
-					
-				</div> 
-			</small>
-			
-			<?php  
-			echo '<br>'.$contact['id'];
-			echo '<br>'.$contact['name'];
-			echo '<br>'.$contact['mail'];
-			echo '<br>'.$contact['mobile'];
-			echo '<br>'.$contact['message'];
-			
-			?>
-			
-			
-			<?php echo word_limiter($contact['message'], 10); ?>
-		
-		
-		<br><br>
-		<p><a class="btn btn-default btn-sm" href="<?php echo base_url(); ?>contact/view/<?php echo $contact['id']; 
-		
-		// echo base_url('/contact/view/'.$contact['id'].'/'.url_title(mb_substr($contact['massege'], 0, 29))); ?>">Read More</a></p>
-		</div>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+</table>
 
-	</div>
-<br>
-<?php endforeach; ?>

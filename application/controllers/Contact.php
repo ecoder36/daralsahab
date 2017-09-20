@@ -2,7 +2,6 @@
 	class Contact extends CI_Controller{
 		
 		
-		
 		public function form(){	
 			$data['title'] = 'contactPage' ;
 			//$data['file']  = $this->property_model->get_files();
@@ -23,7 +22,7 @@
 			}else {
 						$this->contact_model->create_contact();
 						// Set message
-						$this->session->set_flashdata('post_created', 'Your post has been created');
+						$this->session->set_flashdata('success', 'تم إرسال رسالتك بنجاح');
 						redirect('contact/form');
 					}
 			}
