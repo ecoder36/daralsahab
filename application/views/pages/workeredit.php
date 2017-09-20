@@ -62,7 +62,7 @@ https://codepen.io/Rio517/pen/NPLbpP/
 	</td>
     </tr>
 	<tr><td>
-	    <a  href="" data-toggle="modal" data-target="#myModal">إضافة مرفقات جديدة</a>
+	    <a  href="" data-toggle="modal" data-target="#ModalAtt">إضافة مرفقات جديدة</a>
 	</td>
 	</tr>
 </table>
@@ -80,7 +80,7 @@ https://codepen.io/Rio517/pen/NPLbpP/
 </form>
 
 <!-- Modal -->
-        <div id="myModal" class="modal fade" role="dialog">
+        <div id="ModalAtt" class="modal fade" role="dialog">
           <div class="modal-dialog">
         
             <!-- Modal content-->

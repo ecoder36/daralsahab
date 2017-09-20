@@ -39,6 +39,8 @@
 		}
 		
 		public function view($id = NULL ,$slug = NULL){
+			
+			$data['title'] = 'الرسالة';
 			$data['post'] = $this->contact_model->get_contact($id);
 		
 		//	$data['comments'] = $this->comment_model->get_comments($post_id);
