@@ -17,7 +17,7 @@
 		
 		// Log in user
 		public function login(){
-			$data['title'] = 'Sign In';
+			$data['title'] = 'تسجيل الدخول';
 			$this->form_validation->set_rules('username', 'Username', 'required');
 			$this->form_validation->set_rules('password', 'Password', 'required');
 			if($this->form_validation->run() === FALSE){
@@ -50,11 +50,11 @@
 					);
 					$this->session->set_userdata($user_data);//from ($user_data) you can access the array when ever you want
 					// Set message
-					$this->session->set_flashdata('user_loggedin', 'You are now logged in');
+					$this->session->set_flashdata('success', 'تم تسجيل الدخول بنجاح');
 					redirect('pages/view');
 				} else {
 					// Set message
-					$this->session->set_flashdata('login_failed', 'Login is invalid');
+					$this->session->set_flashdata('danger', 'يوجد خطأ في تسجيل الدخول');
 					redirect('users/login');
 				}		
 			}
@@ -66,7 +66,7 @@
 			$this->session->unset_userdata('logged_in_1');
 
 			// Set message
-			$this->session->set_flashdata('user_loggedout', 'You are now logged out');
+			$this->session->set_flashdata('success', 'تم تسجيل الخروج بنجاع');
 			redirect('users/login');
 		}
 		// Check if username exists
@@ -109,7 +109,7 @@
 		//	$data['comments'] = $this->comment_model->get_comments($post_id);
 			if(empty($data['user'])){
 				//show_404();
-				$this->session->set_flashdata('post_updated', 'no user');//post_updated is an id for the message
+				$this->session->set_flashdata('danger', 'no user');
 				redirect('users/main');
 			}
 			
@@ -121,13 +121,21 @@
 		
 			
 		public function delete($p_id){
-			
+				//Check login
+			if(!$this->session->userdata('logged_in_1')){
+				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+				redirect('users/login');
+				if($_SESSION['isadmin'] != 1){
+					$this->session->set_flashdata('danger', 'خطأ');
+					redirect('users/login');
+				}
+			}
 				$delete = $this->user_model->delete_user($p_id) ; 
 			 	if($delete){
-			 		$this->session->set_flashdata('category_deleted', 'has been deleted');
+			 		$this->session->set_flashdata('success', 'تم الحذف بنجاح');
 					redirect('users/main');
 			 	}else{
-			 		$this->session->set_flashdata('category_deleted', 'not deleted');
+			 		$this->session->set_flashdata('danger', 'خطأ لم يتم الحذف');
 					redirect('users/view/'.$p_id);
 			 	}
 			 
@@ -137,7 +145,12 @@
 		public function edit($id){
 				//Check login
 			if(!$this->session->userdata('logged_in_1')){
+				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
 				redirect('users/login');
+				if($_SESSION['isadmin'] != 1){
+					$this->session->set_flashdata('danger', 'خطأ');
+					redirect('users/login');
+				}
 			}
 			$data['user'] = $this->user_model->get_user($id);
 			if(empty($data['user'])){
@@ -150,18 +163,22 @@
 				 
 			
 			 
-			$data['title'] = 'Edit User';
+			$data['title'] = 'تعديل بيانات المستخدم';
 			$this->load->view('templates/header', $data);
 			$this->load->view('users/edit', $data);
 			$this->load->view('templates/footer');
 		}
 		
 		public function update(){
-				//	echo 'SUBMITED';
 			//Check login
-			// if(!$this->session->userdata('logged_in_1')){
-			// 	redirect('users/login');
-			// }
+			if(!$this->session->userdata('logged_in_1')){
+				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+				redirect('users/login');
+				if($_SESSION['isadmin'] != 1){
+					$this->session->set_flashdata('danger', 'خطأ');
+					redirect('users/login');
+				}
+			}
 		//	echo $this->input->post('country') ; die() ;
 			$user_id = $this->input->post('id');
 			// if(!$this->input->post('condetion')){
@@ -169,26 +186,22 @@
 			// 	redirect('property/edit/'.$post_id.'/#condetion');
 			// }
 			$input_username =  $this->input->post('username');
-			
-				$data['user'] = $this->user_model->get_user($user_id);
+			$input_email =  $this->input->post('email');
+			$input_mobile =  $this->input->post('mobile');
+			$data['user'] = $this->user_model->get_user($user_id);
 			$data['title'] = 'Edit User';
-			
-		
-			
-			
-			if( $input_username != $data['user']['username']){
+		if( $input_username != $data['user']['username']){
 				$this->form_validation->set_rules('username', 'Username', 'trim|required|callback_check_username_exists');
 			}
-			
-			
+		if( $input_email != $data['user']['u_email']){
+					$this->form_validation->set_rules('email', 'Email', 'trim|required|callback_check_email_exists');
+			}
+		if( $input_mobile != $data['user']['mobile']){
+				$this->form_validation->set_rules('mobile', 'Mobile', 'trim|required|min_length[4]|is_unique[users.mobile]', array('is_unique' => 'This mobile already exists. Please choose another one.'));
+			}
 			    $this->form_validation->set_rules('name', 'Name', 'required');
-			    
-			
-			
-			//	$this->form_validation->set_rules('email', 'Email', 'required|callback_check_email_exists');
-			//	$this->form_validation->set_rules('mobile', 'Mobile', 'required|min_length[4]|is_unique[users.mobile]', array('is_unique' => 'This mobile already exists. Please choose another one.'));
-		    	$this->form_validation->set_rules('isadmin', 'IsAdmin', 'required|max_length[1]|min_length[1]');
-			//	$this->form_validation->set_rules('password', 'Password', 'trim|required|alpha_numeric');
+				$this->form_validation->set_rules('isadmin', 'IsAdmin', 'trim|required|max_length[1]|min_length[1]');
+				$this->form_validation->set_rules('password', 'Password', 'trim');
 				if($this->form_validation->run() === FALSE ){
 				//redirect('users/edit/'.$user_id,$data);
 				$this->load->view('templates/header', $data);
@@ -213,8 +226,7 @@
 			if(!$this->session->userdata('logged_in_1')){
 				redirect('users/login');
 			}
-			
-			$data['title'] = 'تغيير الباسورد';
+				$data['title'] = 'تغيير الباسورد';
 		    	$this->load->view('templates/header', $data);
 				$this->load->view('users/changepass', $data);
 				$this->load->view('templates/footer');
@@ -268,12 +280,21 @@
 		
 		// Register user
 		public function register(){
-			$data['title'] = 'Sign Up';
+				//Check login
+			if(!$this->session->userdata('logged_in_1')){
+				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+				redirect('users/login');
+				if($_SESSION['isadmin'] != 1){
+					$this->session->set_flashdata('danger', 'خطأ');
+					redirect('/');
+				}
+			}
+			$data['title'] = 'إضافة مستخدم جديد';
 			$this->form_validation->set_rules('name', 'Name', 'required');
-			$this->form_validation->set_rules('username', 'Username', 'required|callback_check_username_exists');
-			$this->form_validation->set_rules('email', 'Email', 'required|callback_check_email_exists');
-			$this->form_validation->set_rules('mobile', 'Mobile', 'required|min_length[4]|is_unique[users.mobile]', array('is_unique' => 'This mobile already exists. Please choose another one.'));
-			$this->form_validation->set_rules('isadmin', 'IsAdmin', 'required|max_length[1]|min_length[1]');
+			$this->form_validation->set_rules('username', 'Username', 'trim|required|callback_check_username_exists');
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|callback_check_email_exists');
+			$this->form_validation->set_rules('mobile', 'Mobile', 'trim|required|min_length[4]|is_unique[users.mobile]', array('is_unique' => 'This mobile already exists. Please choose another one.'));
+			$this->form_validation->set_rules('isadmin', 'IsAdmin', 'trim|required|max_length[1]|min_length[1]',array('required' => 'خطأ يجب اختيار الصلاحية') );
 			$this->form_validation->set_rules('password', 'Password', 'trim|required');
 			$this->form_validation->set_rules('password2', 'Confirm Password', 'matches[password]');
 			if($this->form_validation->run() === FALSE){

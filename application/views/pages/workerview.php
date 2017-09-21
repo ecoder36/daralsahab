@@ -12,7 +12,12 @@ $(document).ready(function() {
     } );
 } );
 </script>
-<table id="example" class="display" cellspacing="0" width="100%" dir="rtl">
+<style type="text/css">
+    th, td { text-align: center; }
+</style>
+<input name="b_print" type="button" class="btn btn-default"   onClick="printdiv('div_print');" value=" طباعة ">
+<div id="div_print"><br>
+    <table id="example" class="display" cellspacing="0" width="100%" dir="rtl">
         <thead>
             <tr>
                 <th>الاسم</th>
@@ -21,7 +26,7 @@ $(document).ready(function() {
                 <th>تاريخ البطاقة</th>
                 <th>تاريخ الانشاء</th>
                 <th>الصورة</th>
-                <th>المزيد</th>
+                <th class="dontprint">المزيد</th>
             </tr>
         </thead>
         <tbody>
@@ -47,18 +52,9 @@ $(document).ready(function() {
         		<td width="150" bgcolor="green"><?php echo  $dayes ; ?></td>
         		<?php } ?>
                 <td width="121"><img height="122" class="post-thumb" src="<?php echo base_url(); ?>assets/images/posts/<?php if($property['default'] == 'notdef' || $property['file']!=NULL){ echo $property['file']; }else{echo 'noimage.jpg'; } ?>"></td>
-                <td>
-                <p><a class="btn btn-default btn-sm" href="<?php echo base_url('/worker/view/'.$property['id'].'/'.url_title(mb_substr($property['name'], 0, 29))); ?>">Read More</a></p>
-                	<div class="pull-right">
-        					<!--for Admin-->
-        					<a class="btn-link text-danger" href="<?php echo base_url(); ?>worker/delete/<?php echo $property['id']; ?>">[ X ]</a>
-        					<?php echo $property['id']; ?>
-        					<!--end for Admin-->
-        			</div> 
-
-</td>
+                <td class="dontprint"><p><a class="btn btn-default btn-sm" href="<?php echo base_url('/worker/view/'.$property['id'].'/'.url_title(mb_substr($property['name'], 0, 29))); ?>"> قراءة المزيد </a></p></td>
             </tr>
-
-<?php endforeach; ?>
+        <?php endforeach; ?>
         </tbody>
     </table>
+</div>

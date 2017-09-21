@@ -1,7 +1,9 @@
+<div class="well">
+<h1 class="text-right"><?= $title; ?></h1>
 <?php echo form_open('users/register'); ?>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
-			<h1 class="text-center"><?= $title; ?></h1>
+			
 			<div class="form-group">
 				<label>الاسم</label>
 				<input type="text" class="form-control" value="<?php echo set_value('name'); ?>" name="name" placeholder="Name">
@@ -21,7 +23,7 @@
 			</div>
 			<div class="form-group">
 				<label>الصلاحية </label>
-				<select name="isadmin" class="form-control" id="select">
+				<select style="height:50px;" name="isadmin" class="form-control" id="select">
 				  <option></option>
 		          <option value="1">مسؤول</option>
 		          <option value="2">مستخدم</option>
@@ -39,3 +41,4 @@
 		</div>
 	</div>
 <?php echo form_close(); ?>
+</div>

@@ -34,6 +34,27 @@
           font-style: normal;
         }
       </style>
+      
+      <!-- Print script -->
+      <style type="text/css" media="print">
+.dontprint
+{ display: none; }
+</style>
+      <script language="javascript">
+        function printdiv(printpage)
+        {
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        var newstr = document.all.item(printpage).innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr+newstr+footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        return false;
+ 
+        }
+
+      </script>
     </head>
     <body style="font-family: 'Regulara2'; font-sizeq: 100%;" dir="rtl">
     <nav class="navbar navbar-inverse">
@@ -71,7 +92,7 @@
               <li><a href="" data-toggle="modal" data-target="#myModal"><?php echo $_SESSION['username']; ?></a></li>
               <li><a href="<?php echo base_url(); ?>users/logout">تسجيل الخروج</a></li>
               <?php if($this->session->userdata('isadmin') == "1"):?>
-                <li class="dropdown ">
+              <li class="dropdown ">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"> المستخدمين  <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li class="divider"></li>
