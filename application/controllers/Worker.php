@@ -1,7 +1,9 @@
 <?php
 	class Worker extends CI_Controller{
 		
-		public function sms(){	
+		public function sms(){
+				$data['title'] = '  الرسائل  ' ;
+				
 			$this->load->view('templates/header', @$data);
 			$this->load->view('sms/form', @$data);
 			$this->load->view('templates/footer');
@@ -62,7 +64,10 @@ die();
 		}
 	
 	public function create(){
-	   	
+	   	if(!$this->session->userdata('logged_in_1')){
+				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+				redirect('users/login');
+			}
 	        $data['title'] = 'إضافة عامل';
 	  //      $this->form_validation->set_rules('title', 'Title', 'required');
 			$this->form_validation->set_rules('name', 'Name', 'required');
@@ -118,7 +123,7 @@ die();
 			 	$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
 			 	redirect('users/login');
 			 }
-			$data['title'] = 'This is Main Property page'.'<br>';
+			$data['title'] = 'قائمة العاملين';
 			$data['posts'] = $this->worker_model->get_workers() ;
 		
 
@@ -151,10 +156,14 @@ die();
 		
 		public function delete($p_id){
 				//Check login
-			 if(!$this->session->userdata('logged_in_1')){
-			 	$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
-			 	redirect('users/login');
-			 }
+				if(!$this->session->userdata('logged_in_1')){
+					$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+					redirect('users/login');
+				}
+				if($_SESSION['isadmin'] != 1){
+					$this->session->set_flashdata('danger', 'خطأ');
+					redirect('worker/view/'.$p_id);
+				}
 				$files = $this->worker_model->get_files($p_id);
 				foreach($files as $file) : 
 					 $path_to_file = './assets/images/posts/'.$file['file'] ;
@@ -175,10 +184,14 @@ die();
 		
 		public function edit($id){
 				//Check login
-			// if(!$this->session->userdata('logged_in_1')){
-			// 	redirect('users/login');
-			// }
-			
+			if(!$this->session->userdata('logged_in_1')){
+				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+				redirect('users/login');
+			}
+			if($_SESSION['isadmin'] != 1){
+				$this->session->set_flashdata('danger', 'خطأ');
+				redirect('worker/view/'.$id);
+			}
 			$data['post'] = $this->worker_model->get_worker($id);
 		//	$data['postid'] = $this->post_model->get_posts_by_id($id,'categories.id');
 		// echo $data['post']['title']; 
@@ -194,19 +207,24 @@ die();
 			if(empty($data['post'])){
 				show_404();
 			}
-			$data['title'] = 'Edit Post';
+			$data['title'] = 'تعديل البيانات';
 			$this->load->view('templates/header', $data);
 			$this->load->view('pages/workeredit', $data);
 			$this->load->view('templates/footer');
 		}
 		
 		public function update(){
-				//	echo 'SUBMITED';
+			
 			//Check login
-			// if(!$this->session->userdata('logged_in_1')){
-			// 	redirect('users/login');
-			// }
-		//	echo $this->input->post('country') ; die() ;
+			if(!$this->session->userdata('logged_in_1')){
+				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+				redirect('users/login');
+			}
+			if($_SESSION['isadmin'] != 1){
+				$this->session->set_flashdata('danger', 'خطأ');
+				redirect('/');
+			}
+		
 			$post_id = $this->input->post('id');
 			// if(!$this->input->post('condetion')){
 			// 	 $this->session->set_flashdata('post_updated', 'condetion please');//post_updated is an id for the message
@@ -214,7 +232,7 @@ die();
 			// }
 			$this->worker_model->update_worker();
         
-            $this->session->set_flashdata('post_updated', 'Your post has been updated');//post_updated is an id for the message
+            $this->session->set_flashdata('success', 'تم تحديث البيانات بنجاح');//post_updated is an id for the message
 			redirect('worker/view/'.$post_id);
 		}
 	
@@ -231,7 +249,7 @@ die();
 				
 					$files = $this->worker_model->get_files($post_id);
 				if(count($files) > 5){
-			 		$this->session->set_flashdata('post_updated', 'You can not Add more');//post_updated is an id for the message
+			 		$this->session->set_flashdata('danger', 'لا يمكنك إضافة المزيد');//post_updated is an id for the message
 					redirect('worker/edit/'.$post_id);
 			 	}
 			 	
@@ -249,11 +267,11 @@ die();
 				 		$this->worker_model->delete_file($fid);
 				 	}
 				 	
-					$this->session->set_flashdata('post_updated', 'Your post has been added');//post_updated is an id for the message
+					$this->session->set_flashdata('success', 'تمت الإضافة بنجاح');//post_updated is an id for the message
 					redirect('worker/edit/'.$post_id);
 				}else{
 					 $error = array('error' => $this->upload->display_errors());
-					 $this->session->set_flashdata('post_updated',$error['error']);//post_updated is an id for the message
+					 $this->session->set_flashdata('danger',$error['error']);//post_updated is an id for the message
 					redirect('worker/edit/'.$post_id);
 				}
 	   //         $this->session->set_flashdata('post_updated', 'Your post has been added');//post_updated is an id for the message
@@ -267,7 +285,7 @@ die();
 			$file_name = $this->worker_model->get_worker_toDeleteFile($id)->file;
 			$file_default = $this->worker_model->get_worker_toDeleteFile($id)->default;
 			 if( $file_name == "noimage.jpg"){
-					$this->session->set_flashdata('category_deleted', 'can not delete this image you can only Add New');
+					$this->session->set_flashdata('danger', 'can not delete this image you can only Add New');
 					redirect('worker/edit/'.$post_id);
 			 }else{
 			 	$files = $this->worker_model->get_files($post_id);
@@ -285,7 +303,7 @@ die();
 			 		$path_to_file = './assets/images/posts/'.$file_name ;
 					unlink($path_to_file);
 			 	}
-			 	$this->session->set_flashdata('category_deleted', 'img has been deleted');
+			 	$this->session->set_flashdata('success', 'تم حذف الصورة بنجاح');
 					redirect('worker/edit/'.$post_id);
 			 }
 		}

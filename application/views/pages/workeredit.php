@@ -1,6 +1,3 @@
-
-
-
 <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 <!-- Refrence 
 https://silviomoreto.github.io/bootstrap-select/examples/
@@ -10,15 +7,29 @@ https://codepen.io/Rio517/pen/NPLbpP/
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 <!--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>-->
-<h2><?= $title ?></h2>
-<p>أهلا وسهلا بك في الصفحة الرئيسية</p>
 
-<?php echo validation_errors(); ?>
+<!-- BEGIN PAGE BREADCRUMBS -->
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            <a href="<?php echo base_url(); ?>users/main">عرض المستخدمين</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="<?php echo base_url('/worker/view/'.$post['id'].'/'.url_title(mb_substr($post['name'], 0, 12))); ?>"> <?php echo $post['name']?> </a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span> <?php echo $post['name']; ?> </span>
+        </li>
+    </ul>
+<!-- END PAGE BREADCRUMBS -->
+
+<h2><?= $title ?></h2>
 <?php echo form_open_multipart('worker/update'); date_default_timezone_set('Asia/Riyadh'); ?>
 	<input type="hidden" name="id" value="<?php echo $post['id']; ?>">
     <div class="row">
         <div class="col-md-12">
-    		<h1 class="text-center"><?= $title; ?></h1>
+          
     		<div class="form-group">
     			<label>اسم العامل</label>
     			<input type="text" class="form-control" value="<?php echo $post['name']; ?>" name="name" placeholder="الاسم">
@@ -50,7 +61,7 @@ https://codepen.io/Rio517/pen/NPLbpP/
 		 		<img width="128" height="128" src="<?php echo site_url(); ?>assets/images/posts/<?php echo $file['file']; ?>">
 		 	<?php elseif($file['file'] != 'noimage.jpg'): ?>
 		 		<img width="128" height="128" src="<?php echo site_url(); ?>assets/images/posts/<?php echo $file['file']; ?>">&nbsp &nbsp&nbsp&nbsp<br><br>
-		 			<a onclick="return confirm('Are you sure? Delete <?php echo $file['file']; ?>')" href="<?php echo site_url(); ?>worker/delete_file/<?php echo $file['f_id']; ?>" class="btn-link text-danger">[X]</a>
+		 			<a onclick="return confirm('هل انت متأكد من حذف  <?php echo $file['file']; ?>')" href="<?php echo site_url(); ?>worker/delete_file/<?php echo $file['f_id']; ?>" class="btn-link text-danger">[X]</a>
 			<?php endif; ?>
 			 		</td>
 		<!--</div>-->
@@ -72,7 +83,7 @@ https://codepen.io/Rio517/pen/NPLbpP/
 
 	<hr>
     	<div class="text-center">
-    	     <button type="submit" class="btn btn-primary btn-block1 ">Submit</button>
+    	     <button type="submit" class="btn btn-primary btn-block1 ">حفظ</button>
     
     	</div>
    	
@@ -86,22 +97,16 @@ https://codepen.io/Rio517/pen/NPLbpP/
             <!-- Modal content-->
             <div class="modal-content">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <button type="button" class="close pull-left" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">إضافة صورة</h4></h4>
               </div>
-            
                 <?php echo form_open_multipart('worker/add_file'); date_default_timezone_set('Asia/Riyadh'); ?>
               <div class="modal-body">
-                
-                    <p>Some text in the modal.</p>
+                    <p>ملاحظة : </p>
                     <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
-                    <label for="exampleInputFile">File input</label>
-                    
-                    <input type="file" name="morefile" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" onchange="loadFile(event)" accept="image/*">
-    	            
-    	            
-    	             
-    	            <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                    <label for="exampleInputFile">يجب ان تكون الصورة بصيغة</label>
+                    <small id="fileHelp" class="form-text text-muted">( gif | jpg | png )</small>
+                    <input type="file" name="morefile" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" onchange="loadFile(event)" accept="image/*"><br>
     	            <img style="display:inline;" width="128" height="128" id="output" src="#" alt="your image b"/><br>
     	            <script>
                       var loadFile = function(event) {
@@ -112,8 +117,8 @@ https://codepen.io/Rio517/pen/NPLbpP/
 	            
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">حفظ</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
               </div>
               <?php echo form_close(); ?>
               

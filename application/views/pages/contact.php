@@ -13,18 +13,18 @@ https://codepen.io/Rio517/pen/NPLbpP/
 
 
 <h2><?= $title ?></h2>
-<p>أهلا وسهلا بك في الصفحة الرئيسية</p>
+
 
 <?php echo form_open_multipart('contact/create'); date_default_timezone_set('Asia/Riyadh'); ?>
     <div class="row">
         <div class="col-md-12">
-    		<h1 class="text-center"><?= $title; ?></h1>
+    		<h1 class="text-center"> </h1>
     		<div class="form-group">
-    			<label>الاسم</label>
+    			<label>الاسم</label> *
     			<input type="text" class="form-control" <?php echo set_value('name'); ?> name="name" placeholder="الاسم">
     		</div>
     		<div class="form-group">
-    			<label>جوال</label>
+    			<label>الجوال</label>
     			<input type="text" class="form-control" <?php echo set_value('mobile'); ?> name="mobile" placeholder="الجوال">
     		</div>
     			<div class="form-group">
@@ -33,11 +33,11 @@ https://codepen.io/Rio517/pen/NPLbpP/
     		</div>
     		<div class="col-md-12">
             	<div class="form-group">
-            		<label>الرسالة</label>
+            		<label>الرسالة</label> *
             		<textarea id="editor1" type="text" class="form-control" name="message" placeholder="description" rows="3"><?php echo set_value('description'); ?></textarea>
             	</div>
             </div>
-    		<button type="submit" class="btn btn-primary btn-block">Submit</button>
+    		<button type="submit" class="btn btn-primary btn-block">إرسال</button>
     	</div>
     
     </div>

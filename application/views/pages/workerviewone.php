@@ -28,6 +28,18 @@ $(document).ready(function() {
 <style type="text/css">
     th, td { text-align: center; }
 </style>
+<!-- BEGIN PAGE BREADCRUMBS -->
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            <a href="<?php echo base_url(); ?>worker/main">قائمة العاملين </a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span> <?php echo $post['name']; ?> </span>
+        </li>
+    </ul>
+<!-- END PAGE BREADCRUMBS -->
+<div class="main">
 <input name="b_print" type="button" class="btn btn-default"   onClick="printdiv('div_print');" value=" طباعة ">
 <div id="div_print"><br>
     <table id="example" class="display" cellspacing="0" width="100%" dir="rtl">
@@ -50,14 +62,14 @@ $(document).ready(function() {
                 <td><?php echo $post['idDate']; ?></td>
                 <td><?php echo $post['created_at']; ?></td>
                 <td class="dontprint"><a class="btn btn-default" href="<?php echo base_url(); ?>worker/edit/<?php echo $post['id']; ?>">تعديل</a></td>
-                <td class="dontprint"><a class="btn-link text-danger" href="<?php echo base_url(); ?>worker/delete/<?php echo $post['id']; ?>">حذف</a></td>
+                <td class="dontprint"><a class="btn-link text-danger" onclick="return confirm('هل انت متأكد من حذف معلومات <?php echo $post['name']; ?>')" href="<?php echo base_url(); ?>worker/delete/<?php echo $post['id']; ?>">حذف</a></td>
             </tr>
         </tbody>
     </table>
     <!--Images -->
     <div >
     <hr>
-    <h3>Images</h3>
+    <h3>المرفقات</h3>
     <?php  if($files) : ?>
     <table class="table">
     	<tr>
@@ -74,4 +86,5 @@ $(document).ready(function() {
     <?php endif; ?>
     	<hr>
     </div>
+</div>
 </div>

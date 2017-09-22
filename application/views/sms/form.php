@@ -1,21 +1,30 @@
 
 <?php
    include('sms.class.php');
-   if (isset($_POST['Mobile'])){
-                $DTT_SMS = new Malath_SMS("sultansz","555555",'UTF-8');
-                $Credits = $DTT_SMS->GetCredits();
-                $SenderName = $DTT_SMS->GetSenders();
-        	//	$SmS_Msg = @$_POST['Text'];
-        		$msg = @$_POST['Text'];
+   $DTT_SMS = new Malath_SMS("sultansz","555555",'UTF-8');
+    if (isset($_POST['Mobile'])){
+                 $DTT_SMS = new Malath_SMS("sultansz","555555",'UTF-8');
+                 $Credits = $DTT_SMS->GetCredits();
+                 $SenderName = $DTT_SMS->GetSenders();
+       	//	$SmS_Msg = @$_POST['Text'];
+       		$msg = $this->input->post('Text');;
       //  	echo $msg;
        // 	die();
-        		$SmS_Msg = $msg;
-                $Mobiles = @$_POST['Mobile'];
+       		$SmS_Msg = $msg;
+                $Mobiles = $this->input->post('Mobile');
                 //$Originator ='SFHMCareers';
                 $Originator ='sultanz';
                if(@$Mobiles){
                 $Sends = $DTT_SMS->Send_SMS($Mobiles,$Originator,$SmS_Msg);
-              }
+                if($Sends){
+	                $this->session->set_flashdata('success', 'تم الارسال بنجاح');
+	                	redirect('worker/sms');
+	                }else {
+	                   // code...
+	                    $this->session->set_flashdata('danger', ' خطأ في الإرسال');
+	                	redirect('worker/sms');
+	                }
+             }
     }
              
              ?>
@@ -49,7 +58,8 @@
    </head>
    <body>
       <fieldset style="width:50%;margin:auto" dir=ltr>
-         <form action="" method="POST">
+         <!--<form action="" method="POST">-->
+         <?php echo form_open('worker/sms'); ?>
             <table border="0" cellspacing="3" cellpadding="3">
                <tr>
                   <td>Check UserName And Password</td>

@@ -119,7 +119,6 @@
         <h4 class="modal-title">  معلومات المستخدم </h4>
       </div>
       <div class="modal-body">
-    
          <?php 
          echo  'الإسم : '.$this->session->userdata('name') ;
          echo  '<br>'.'الإيميل : '.$_SESSION['email'];

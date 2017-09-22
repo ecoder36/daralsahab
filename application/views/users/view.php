@@ -8,7 +8,22 @@
                     "visible": false,
                     "searchable": false
                 },
-                ]
+                ],
+                 // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "لا يوجد معلومات لعرضها الآن",
+                "info": "المعلومات الظاهرة :  _START_ إلى _END_ من أصل _TOTAL_ ",
+                "infoEmpty": "لا يوجد معلومات",
+                "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                "lengthMenu": "إظهار _MENU_ لكل صفحة",
+                "search": "بحث:",
+                "searchPlaceholder": "بحث سريع",
+                "zeroRecords": "لا يوجد معلومات"
+            },
         } );
     } );
 </script>
@@ -39,7 +54,7 @@
                     <td><?php echo $property['mobile']; ?></td>
                     <td><?php echo $ISadmin; ?></td>
                     <td>
-                    <p><a class="btn btn-default btn-sm" href="<?php echo base_url('/users/view/'.$property['u_id'].'/'.url_title(mb_substr($property['u_name'], 0, 29))); ?>">Read More</a></p>
+                    <p><a class="btn btn-default btn-sm" href="<?php echo base_url('/users/view/'.$property['u_id'].'/'.url_title(mb_substr($property['u_name'], 0, 29))); ?>">صفحة المستخدم </a></p>
                     </td>
                 </tr>
             <?php endforeach; ?>

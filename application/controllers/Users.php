@@ -66,7 +66,7 @@
 			$this->session->unset_userdata('logged_in_1');
 
 			// Set message
-			$this->session->set_flashdata('success', 'تم تسجيل الخروج بنجاع');
+			$this->session->set_flashdata('success', 'تم تسجيل الخروج بنجاح');
 			redirect('users/login');
 		}
 		// Check if username exists
@@ -89,7 +89,7 @@
 		}
 		
 		public function main(){	
-			$data['title'] = 'This is Main Property page'.'<br>';
+			$data['title'] = 'صفحة المستخدمين';
 			$data['users'] = $this->user_model->get_users() ;
 			//$data['file']  = $this->property_model->get_files();
 		//to check if get from database working ---- you can use print_r($data['posts']);
@@ -125,10 +125,10 @@
 			if(!$this->session->userdata('logged_in_1')){
 				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
 				redirect('users/login');
-				if($_SESSION['isadmin'] != 1){
-					$this->session->set_flashdata('danger', 'خطأ');
-					redirect('users/login');
-				}
+			}
+			if($_SESSION['isadmin'] != 1){
+				$this->session->set_flashdata('danger', 'خطأ');
+				redirect('/');
 			}
 				$delete = $this->user_model->delete_user($p_id) ; 
 			 	if($delete){
@@ -147,10 +147,10 @@
 			if(!$this->session->userdata('logged_in_1')){
 				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
 				redirect('users/login');
-				if($_SESSION['isadmin'] != 1){
-					$this->session->set_flashdata('danger', 'خطأ');
-					redirect('users/login');
-				}
+			}
+			if($_SESSION['isadmin'] != 1){
+				$this->session->set_flashdata('danger', 'خطأ');
+				redirect('/');
 			}
 			$data['user'] = $this->user_model->get_user($id);
 			if(empty($data['user'])){
@@ -174,17 +174,13 @@
 			if(!$this->session->userdata('logged_in_1')){
 				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
 				redirect('users/login');
-				if($_SESSION['isadmin'] != 1){
-					$this->session->set_flashdata('danger', 'خطأ');
-					redirect('users/login');
-				}
 			}
-		//	echo $this->input->post('country') ; die() ;
+			if($_SESSION['isadmin'] != 1){
+				$this->session->set_flashdata('danger', 'خطأ');
+				redirect('/');
+			}
+
 			$user_id = $this->input->post('id');
-			// if(!$this->input->post('condetion')){
-			// 	 $this->session->set_flashdata('post_updated', 'condetion please');//post_updated is an id for the message
-			// 	redirect('property/edit/'.$post_id.'/#condetion');
-			// }
 			$input_username =  $this->input->post('username');
 			$input_email =  $this->input->post('email');
 			$input_mobile =  $this->input->post('mobile');
@@ -216,7 +212,7 @@
 				 $enc_password = $data['user']['password'] ;
 			}
 			$this->user_model->update_user($enc_password);
-            $this->session->set_flashdata('post_updated', 'user has been updated');//post_updated is an id for the message
+            $this->session->set_flashdata('success', 'تم تعديل المستخدم بنجاح');//post_updated is an id for the message
 			redirect('users/view/'.$user_id);
 			}
 		}
@@ -243,7 +239,7 @@
 
 			$user_id = $this->input->post('id');
 			if($user_id != $_SESSION['user_id']){
-				 $this->session->set_flashdata('danger', 'Error');//post_updated is an id for the message
+				 $this->session->set_flashdata('danger', 'خطأ يوجد مشكلة');//post_updated is an id for the message
 				 redirect('users/pagechangepass');
 			}
 			
@@ -252,7 +248,7 @@
 			
 			
 			if($data['user']['password'] != $input_pass){
-			$this->session->set_flashdata('danger', 'password incorect');
+			$this->session->set_flashdata('danger', 'الباسوورد القديم غير صحيح');
 			    redirect('users/pagechangepass');
 			}
 			
@@ -270,7 +266,7 @@
 				$enc_password = $data['user']['password'] ;
 			}
 			$this->user_model->update_user_password($enc_password);
-            $this->session->set_flashdata('success', 'password has been updated');//post_updated is an id for the message
+            $this->session->set_flashdata('success', 'تم تحديث كلمة المرور بنجاح');
 			redirect('users/pagechangepass');
 			}
 		}
@@ -284,10 +280,10 @@
 			if(!$this->session->userdata('logged_in_1')){
 				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
 				redirect('users/login');
-				if($_SESSION['isadmin'] != 1){
-					$this->session->set_flashdata('danger', 'خطأ');
-					redirect('/');
-				}
+			}
+			if($_SESSION['isadmin'] != 1){
+				$this->session->set_flashdata('danger', 'خطأ');
+				redirect('/');
 			}
 			$data['title'] = 'إضافة مستخدم جديد';
 			$this->form_validation->set_rules('name', 'Name', 'required');
@@ -307,8 +303,8 @@
 				$enc_password = md5($this->input->post('password'));
 				$this->user_model->register($enc_password);
 				// Set message
-				$this->session->set_flashdata('user_registered', 'You are now registered and can log in');//user_registered is an id for the message
-				redirect('users/login');
+				$this->session->set_flashdata('user_registered', 'تم إضافة المستخدم بنجاح');
+				redirect('users/register');
 			}
 		}
 	

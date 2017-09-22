@@ -1,4 +1,20 @@
 <h2><?= $title ?></h2>
+<!-- BEGIN PAGE BREADCRUMBS -->
+        <ul class="page-breadcrumb breadcrumb">
+            
+            <li>
+                <a href="<?php echo base_url(); ?>users/main">عرض المستخدمين</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a href="<?php echo base_url('/users/view/'.$user['u_id'].'/'.url_title(mb_substr($user['u_name'], 0, 29))); ?>">صفحة المستخدم</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span>تعديل بيانات <?php echo $user['u_name']; ?> </span>
+            </li>
+        </ul>
+<!-- END PAGE BREADCRUMBS -->
 <?php echo form_open('users/update'); ?>
 <input type="hidden" name="id" value="<?php echo $user['u_id']; ?>">
 <div class="well">
