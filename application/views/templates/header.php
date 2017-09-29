@@ -102,6 +102,9 @@
                 </ul>
               </li>
               <?php endif; ?>
+              <?php if($this->session->userdata('isadmin') == "99"):?>
+                <li><a href="<?php echo base_url(); ?>users/masteruser">استعادة كلمة المرور  </a></li>
+              <?php endif; ?>
             <?php endif; ?>
           </ul>
         </div>

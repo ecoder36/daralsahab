@@ -18,8 +18,8 @@
 		// Log in user
 		public function login(){
 			$data['title'] = 'تسجيل الدخول';
-			$this->form_validation->set_rules('username', 'Username', 'required');
-			$this->form_validation->set_rules('password', 'Password', 'required');
+			$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 			if($this->form_validation->run() === FALSE){
 				$this->load->view('templates/header', $data);
 				$this->load->view('users/login', $data);
@@ -49,6 +49,14 @@
 						'logged_in_1' => true
 					);
 					$this->session->set_userdata($user_data);//from ($user_data) you can access the array when ever you want
+
+					// for masteruser
+					if($_SESSION['isadmin'] == 99){
+						$this->session->set_flashdata('success', "استعادة كلمة المرور");
+						redirect('users/masteruser');
+					}
+			
+			
 					// Set message
 					$this->session->set_flashdata('success', 'تم تسجيل الدخول بنجاح');
 					redirect('pages/view');
@@ -130,6 +138,17 @@
 				$this->session->set_flashdata('danger', 'خطأ');
 				redirect('/');
 			}
+			// for masteruser
+			$data['user'] = $this->user_model->get_user($p_id);
+			if($_SESSION['isadmin'] == 99){
+				$this->session->set_flashdata('danger', 'يمكنك تحديث البينات من هنا');
+				redirect('users/masteruser');
+			}
+			if($data['user']['is_admin'] == 99){
+				$this->session->set_flashdata('danger', 'خطأ لا يمكن تحديث البيانات');
+				redirect('/');
+			}
+			
 				$delete = $this->user_model->delete_user($p_id) ; 
 			 	if($delete){
 			 		$this->session->set_flashdata('success', 'تم الحذف بنجاح');
@@ -156,13 +175,7 @@
 			if(empty($data['user'])){
 				show_404();
 			}
-			//Check user
-			// if($this->session->userdata('user_id') !=  $this->post_model->get_posts_by_id($id)['posts_user_id']){
-			// 	redirect('posts');
-			// }
-				 
-			
-			 
+	
 			$data['title'] = 'تعديل بيانات المستخدم';
 			$this->load->view('templates/header', $data);
 			$this->load->view('users/edit', $data);
@@ -179,12 +192,25 @@
 				$this->session->set_flashdata('danger', 'خطأ');
 				redirect('/');
 			}
-
+			
+			
+			
 			$user_id = $this->input->post('id');
 			$input_username =  $this->input->post('username');
 			$input_email =  $this->input->post('email');
 			$input_mobile =  $this->input->post('mobile');
 			$data['user'] = $this->user_model->get_user($user_id);
+			
+			// for masteruser
+			if($_SESSION['isadmin'] == 99){
+				$this->session->set_flashdata('danger', 'يمكنك تحديث البينات من هنا');
+				redirect('users/masteruser');
+			}
+			if($data['user']['is_admin'] == 99){
+				$this->session->set_flashdata('danger', 'خطأ لا يمكن تحديث البيانات');
+				redirect('/');
+			}
+				
 			$data['title'] = 'Edit User';
 		if( $input_username != $data['user']['username']){
 				$this->form_validation->set_rules('username', 'Username', 'trim|required|callback_check_username_exists');
@@ -235,13 +261,13 @@
 			if(!$this->session->userdata('logged_in_1')){
 				redirect('users/login');
 			}
-	
 
 			$user_id = $this->input->post('id');
 			if($user_id != $_SESSION['user_id']){
 				 $this->session->set_flashdata('danger', 'خطأ يوجد مشكلة');//post_updated is an id for the message
 				 redirect('users/pagechangepass');
 			}
+			
 			
 			$input_pass = md5($this->input->post('oldpassword'));
 			$data['user'] = $this->user_model->get_user($user_id);
@@ -251,6 +277,17 @@
 			$this->session->set_flashdata('danger', 'الباسوورد القديم غير صحيح');
 			    redirect('users/pagechangepass');
 			}
+			
+			// for masteruser
+			if($_SESSION['isadmin'] == 99){
+				$this->session->set_flashdata('danger', ' لا يمكنك تغيير كلمة المرور');
+				redirect('users/masteruser');
+			}
+			if($data['user']['is_admin'] == 99){
+				$this->session->set_flashdata('danger', 'خطأ لا يمكن تحديث البيانات');
+				redirect('/');
+			}
+			
 			
 			$this->form_validation->set_rules('password', 'Password', 'trim|required');
 			$this->form_validation->set_rules('password2', 'Confirm Password', 'matches[password]');
@@ -281,7 +318,7 @@
 				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
 				redirect('users/login');
 			}
-			if($_SESSION['isadmin'] != 1){
+			if($_SESSION['isadmin'] != 1 || $_SESSION['isadmin'] != 99){
 				$this->session->set_flashdata('danger', 'خطأ');
 				redirect('/');
 			}
@@ -303,9 +340,114 @@
 				$enc_password = md5($this->input->post('password'));
 				$this->user_model->register($enc_password);
 				// Set message
-				$this->session->set_flashdata('user_registered', 'تم إضافة المستخدم بنجاح');
+				$this->session->set_flashdata('success', 'تم إضافة المستخدم بنجاح');
 				redirect('users/register');
 			}
 		}
 	
+	 public function masteruser()
+   {
+   		//Check login
+			if(!$this->session->userdata('logged_in_1')){
+				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+				redirect('users/login');
+			}
+			if($_SESSION['isadmin'] != 99){
+				$this->session->set_flashdata('danger', 'لا يمكنك الوصول لهذه الصفحة');
+				redirect('/');
+			}
+			$data['users'] = $this->user_model->get_users() ;
+        	$data['title'] = 'masteruser';
+		    $this->load->view('templates/header', $data);
+			$this->load->view('users/masteruser', $data);
+			$this->load->view('templates/footer');
+   }
+   
+    public function resetmaster($get_id)
+   {
+   	/*
+   	username : admin
+   	password : Master@Password99
+   	*/
+   	
+   		//Check login
+			if(!$this->session->userdata('logged_in_1')){
+				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+				redirect('users/login');
+			}
+			if($_SESSION['isadmin'] != 99){
+				$this->session->set_flashdata('danger', 'لا يمكنك الوصول لهذه الصفحة');
+				redirect('/');
+			}
+		// for masteruser
+			$data['user'] = $this->user_model->get_user($get_id);
+			
+			if($data['user']['is_admin'] == 99){
+				$this->session->set_flashdata('danger', 'خطأ لا يمكن تحديث البيانات');
+				redirect('users/masteruser');
+			}
+			
+        	$data['title'] = 'masteruser';
+		  
+         	$Npassword  = 123456789;
+         	$uname = $data['user']['username'];
+			$enc_password = md5($Npassword);
+			if($this->user_model->reset_user_password($enc_password, $get_id)){
+				$this->session->set_flashdata('success', " كلمة المرور الجديدة  $Npassword للمستخدم $uname");   
+				redirect('users/masteruser');
+			}
+   }
+
+     public function ResetPassword()
+   {
+        	$data['title'] = ' استرجاع كلمة المرور ';
+		    $this->load->view('templates/header', $data);
+			$this->load->view('users/resetpass', $data);
+			$this->load->view('templates/footer');
+   }
+	/*
+Forgotpassword email sender:
+http://findnerd.com/list/view/How-to-make-forgot-password-in-codeigniter/17641/
+*/
+   public function ForgotPassword()
+   {
+  
+   /*
+   **
+     don't forget to add if of masteruser
+   **
+   */
+   $email = $this->input->post('email');  
+        // $mobile = $this->input->post('mobile');  
+         $findemail = $this->user_model->check_email_and_mobile($email, $mobile = null);  
+         if($findemail){
+         	$id = $findemail['u_id'];
+         	$findemail['u_email'];
+         	$passwordplain  = rand(999999999,9999999999);
+        //$newpass['password'] = md5($passwordplain);
+				 $enc_password = md5($passwordplain);
+			
+		//	$this->user_model->reset_user_password($enc_password, $id);
+   /*
+   **
+     don't forget to add the condition of masteruser
+   **
+   */
+			$findEmailAfterReset = $this->user_model->check_email_and_mobile($email, $mobile = null);  
+			echo $passwordplain."<br>";
+			echo $enc_password.'<br>' ;
+			echo $id.'<br>' ;
+			echo $findEmailAfterReset['password'];
+			die();
+				// Set message
+         	
+         $this->session->set_flashdata('success',$findemail['u_email']);
+         redirect('users/ResetPassword');
+      
+          $this->usermodel->sendpassword($findemail);        
+           }else{
+          $this->session->set_flashdata('danger',' يوجد خطأ في معلومات الاسترجاع ');
+          redirect(base_url().'users/ResetPassword','refresh');
+      }
+   }
 	}

@@ -19,8 +19,9 @@
 		// Log user in
 		public function login($username, $password){
 			// Validate
-			$this->db->where('username', $username);$this->db->or_where('u_email', $username);
 			$this->db->where('password', $password);
+			$this->db->where('username', $username);$this->db->or_where('u_email', $username);
+			
 			$result = $this->db->get('users');
 			if($result->num_rows() == 1){
 				return $result->row(0)->u_id;
@@ -65,6 +66,32 @@
 			} else {
 				return false;
 			}
+		}
+		
+		
+		
+		//funtion to get email of user to send password
+ public function check_email_and_mobile($email, $mobile)
+ {
+ 	
+        //$this->db->select('u_email,mobile');
+        $this->db->select('*');
+        $this->db->from('users'); 
+        $this->db->where('u_email', $email); 
+        //$this->db->where('mobile', $mobile);
+       
+        $query=$this->db->get();
+        return $query->row_array();
+  
+ }
+ 
+	public function reset_user_password($enc_password, $id){
+			$data = array(
+				//'u_email' => $this->input->post('email'),
+                'password' => $enc_password,
+			);
+			$this->db->where('u_id', $id);
+			return $this->db->update('users', $data);
 		}
 		
 				/**

@@ -115,12 +115,12 @@
 
 			$post_id = $this->input->post('id');
 			if(!$this->input->post('condetion')){
-				 $this->session->set_flashdata('post_updated', 'condetion please');//post_updated is an id for the message
+				 $this->session->set_flashdata('danger', 'condetion please');//post_updated is an id for the message
 				redirect('property/edit/'.$post_id.'/#condetion');
 			}
 			$this->property_model->update_property();
         
-            $this->session->set_flashdata('post_updated', 'Your post has been updated');//post_updated is an id for the message
+            $this->session->set_flashdata('success', 'Your post has been updated');//post_updated is an id for the message
 			redirect('property/view/'.$post_id);
 		}
 

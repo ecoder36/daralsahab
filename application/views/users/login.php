@@ -8,6 +8,9 @@
 			<div class="form-group">
 				<input type="password" name="password" class="form-control" placeholder="Enter Password" required autofocus>
 			</div>
+			<!--<div class="form-group">-->
+				<!--<a href="<?php //echo base_url(); ?>users/ResetPassword">نسيت كلمة المرور</a>	-->
+			<!--</div>-->
 			<button type="submit" class="btn btn-primary btn-block">تسجيل الدخول</button>
 		</div>
 	</div>

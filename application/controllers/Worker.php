@@ -10,17 +10,7 @@
 			}
 			
 		public function mail(){	
-				// $config = Array(
-		// 	'smtp_host' => 'smtp.gmail.com',
-		// 	'smtp_port' =>  587 ,
-		// 	'smtp_user' => 'sultanzagzoog@gmail.com',
-		// 	'smtp_pass' => 'Admin!23',
-		// 	'smtp_crypto' => 'tls'
-		// 	);
-			
-		
-	//	$this->email->initialize($config);
-		//	$this->load->library('email',$config);
+
 			$this->load->library('email');
 			$this->email->set_newline("\r\n");
 			
@@ -37,7 +27,7 @@
 			$mail = $this->email->send();
 			
 			if($mail){
-				echo "success";
+				echo "success"."<br>";
 			}else{
 				show_error($this->email->print_debugger());
 				echo "failur";
@@ -145,7 +135,7 @@ die();
 		//	$data['comments'] = $this->comment_model->get_comments($post_id);
 			if(empty($data['post'])){
 				//show_404();
-				$this->session->set_flashdata('post_updated', 'no post');//post_updated is an id for the message
+				$this->session->set_flashdata('danger', 'no post');//post_updated is an id for the message
 				redirect('worker/main');
 			}
 			$data['title'] = $data['post']['name'];
@@ -193,11 +183,7 @@ die();
 				redirect('worker/view/'.$id);
 			}
 			$data['post'] = $this->worker_model->get_worker($id);
-		//	$data['postid'] = $this->post_model->get_posts_by_id($id,'categories.id');
-		// echo $data['post']['title']; 
-		// echo $this->post_model->get_posts_by_id($id)['posts_id'].'<br>';
-		// echo  $this->post_model->get_posts_by_id($id)['posts_user_id'];
-		// die ();
+
 			//Check user
 			// if($this->session->userdata('user_id') !=  $this->post_model->get_posts_by_id($id)['posts_user_id']){
 			// 	redirect('posts');
@@ -226,10 +212,7 @@ die();
 			}
 		
 			$post_id = $this->input->post('id');
-			// if(!$this->input->post('condetion')){
-			// 	 $this->session->set_flashdata('post_updated', 'condetion please');//post_updated is an id for the message
-			// 	redirect('property/edit/'.$post_id.'/#condetion');
-			// }
+		
 			$this->worker_model->update_worker();
         
             $this->session->set_flashdata('success', 'تم تحديث البيانات بنجاح');//post_updated is an id for the message
