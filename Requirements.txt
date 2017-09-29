@@ -4,3 +4,4 @@ Highly Focused Requirements
 * Add the Footer to All pages
 * Add contact us info in the main page
 * Add Application main page for View the Contact Messages
+* Modify Header and Footer to the Application
