@@ -97,6 +97,12 @@
 		}
 		
 		public function main(){	
+				//Check login
+			if(!$this->session->userdata('logged_in_1')){
+				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+				redirect('users/login');
+			}
+			
 			$data['title'] = 'صفحة المستخدمين';
 			$data['users'] = $this->user_model->get_users() ;
 			//$data['file']  = $this->property_model->get_files();
@@ -144,6 +150,7 @@
 				$this->session->set_flashdata('danger', 'يمكنك تحديث البينات من هنا');
 				redirect('users/masteruser');
 			}
+			
 			if($data['user']['is_admin'] == 99){
 				$this->session->set_flashdata('danger', 'خطأ لا يمكن تحديث البيانات');
 				redirect('/');
@@ -318,7 +325,7 @@
 				$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
 				redirect('users/login');
 			}
-			if($_SESSION['isadmin'] != 1 || $_SESSION['isadmin'] != 99){
+			if($_SESSION['isadmin'] != 1 && $_SESSION['isadmin'] != 99){
 				$this->session->set_flashdata('danger', 'خطأ');
 				redirect('/');
 			}

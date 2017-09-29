@@ -41,6 +41,7 @@
         </thead>
         <tbody>
             <?php foreach($users as $property) : ?>
+            <?php if($property['is_admin'] != '99'){ ?>
             <?php 
     		     if( $property['is_admin'] == '1') {$ISadmin = 'مسؤول';}
     			 elseif( $property['is_admin'] == '2') {$ISadmin = 'مستخدم';}
@@ -57,6 +58,6 @@
                     <p><a class="btn btn-default btn-sm" href="<?php echo base_url('/users/view/'.$property['u_id'].'/'.url_title(mb_substr($property['u_name'], 0, 29))); ?>">صفحة المستخدم </a></p>
                     </td>
                 </tr>
-            <?php endforeach; ?>
+            <?php } endforeach; ?>
         </tbody>
 </table>

@@ -42,6 +42,7 @@
         </thead>
         <tbody>
             <?php foreach($users as $property) : ?>
+            <?php if($property['is_admin'] != '99'){ ?>
             <?php 
     		     if( $property['is_admin'] == '1') {$ISadmin = 'مسؤول';}
     			 elseif( $property['is_admin'] == '2') {$ISadmin = 'مستخدم';}
@@ -54,7 +55,7 @@
                     <td><?php echo $ISadmin; ?></td>
                     <td class="dontprint"><a class="btn btn-default" href="<?php echo base_url(); ?>users/resetmaster/<?php echo $property['u_id']; ?>">استعادة كلمة المرور</a></td>
                 </tr>
-            <?php endforeach; ?>
+            <?php } endforeach; ?>
         </tbody>
 </table>
 
