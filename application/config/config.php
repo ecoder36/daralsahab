@@ -25,6 +25,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['base_url'] = 'https://framework-testaa.c9users.io/daralsahab';
 
+// $config['base_url'] = 'https://www.zaqzooq.com/projects/daralsahab';
+
 /*
 |--------------------------------------------------------------------------
 | Index File
