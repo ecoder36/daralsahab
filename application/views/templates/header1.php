@@ -4,11 +4,6 @@
         
         <link rel="shortcut icon" type="image/png" href="<?=  base_url('assets/images/posts/icon.jpg') ?>">
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <meta name="description" content="">
-        <meta name="author" content="">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
         <!--<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>-->
@@ -75,14 +70,14 @@
                 </button>
               </div>
                   
-              <div id="navbar" class="collapse navbar-collapse">
+              <div id="navbar" class="collapse navbar-collapse pull-left">
                 <ul class="nav navbar-nav navbar-right">
                     <!-- to activate base_url() go to config/autoload.php & go to $autoload['helper'] = array() and add 'url' ---- > $autoload['helper'] = array('url');-->
                   <li><a href="<?php echo base_url(); ?>contact/form">اتصل بنا</a></li>
                   <li><a href="<?php echo base_url(); ?>">الصفحة الرئيسية</a></li>
                 </ul>
                 <?php if($this->session->userdata('logged_in_1')):?>
-                <ul class="nav navbar-nav navbar-right">   
+                <ul class="nav navbar-nav pull-right">   
                    <li class="dropdown ">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">العاملين  <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
@@ -95,7 +90,7 @@
                   <li><a href="<?php echo base_url(); ?>contact/main">رسائل اتصل بنا </a></li>  
                 </ul>
                   <?php endif; ?>
-                <ul class="nav navbar-nav navbar-left ">
+                <ul class="nav navbar-nav pull-left ">
                   <?php if(!$this->session->userdata('logged_in_1')):?>
                     <li><a href="<?php echo base_url(); ?>users/login">تسجيل الدخول</a></li>
                   <?php endif; ?>

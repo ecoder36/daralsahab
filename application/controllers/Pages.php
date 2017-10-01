@@ -14,4 +14,10 @@
             $this->load->view('pages/'.$page, $data);
             $this->load->view('templates/footer');
         }
+    
+    	public function test(){
+				$data['title'] = '  test  ' ;
+	
+			$this->load->view('test', @$data);
+    	}
     }

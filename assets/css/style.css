@@ -1,3 +1,46 @@
+body {
+    background-color: #eee;
+}
+
+.center {
+    text-align: center;
+}
+
+
+/*=====Content Styles=====*/
+.content {
+    background-color: white;
+    margin: 30px 50px 10px 50px;
+    padding: 60px 50px 10px 50px;
+    text-align: center;
+    
+}
+
+.auth-content {
+    background-color: white;
+    margin: 30px 10px 10px 10px;
+    padding: 30px 50px 40px 50px;
+}
+
+/*=========Header Styles==========*/
+.navbar {
+    background-color:#303634;
+    padding-top:10px;
+    padding-bottom: 5px;
+    color: blue;
+}
+
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color: white;
+    color: blue;
+}
+
+#back-btn {
+    background-color: white;
+}
+
+
+/*===========Posts Styles==========*/
 .post-date{
 	background:#f4f4f4; /* gray color*/
 	padding:4px;
@@ -28,3 +71,4 @@ a.pagination-links{
 .cat-delete{
 	display:inline;
 }
+
