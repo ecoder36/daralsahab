@@ -1,6 +1,9 @@
 <?php
     class Pages extends CI_Controller{
         public function view($page = 'home'){ // = 'home' to set the default page and here home.php is the default &&&& $page is an example you can chose any thing else any variable to use it
+            
+            redirect("/");
+            
             if(!file_exists(APPPATH.'views/pages/'.$page.'.php')){
                 show_404();
             }

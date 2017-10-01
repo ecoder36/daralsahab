@@ -41,6 +41,7 @@ $(document).ready(function() {
 <!-- END PAGE BREADCRUMBS -->
 <div class="main">
 <input name="b_print" type="button" class="btn btn-default"   onClick="printdiv('div_print');" value=" طباعة ">
+	
 <div id="div_print"><br>
     <table id="example" class="display" cellspacing="0" width="100%" dir="rtl">
         <thead>

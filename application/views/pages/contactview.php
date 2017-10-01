@@ -30,8 +30,11 @@
     } );
 </script>
 <style type="text/css">
-    th, td { text-align: center; }
+    h2, th, td { text-align: center; }
 </style>
+<div class="well">
+    
+<h2><?= $title ?></h2><br>
 <table id="example" class="display" cellspacing="0" width="100%" dir="rtl">
         <thead>
             <tr>
@@ -65,4 +68,4 @@
             <?php endforeach; ?>
         </tbody>
 </table>
-
+</div>

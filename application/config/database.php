@@ -79,6 +79,12 @@ $db['default'] = array(
 	'username' => 'root',
 	'password' => '',
 	'database' => 'alsahab',
+	
+	// 'hostname' => 'uk29.siteground.eu',
+	// 'username' => 'newestap_alsahab',
+	// 'password' => 'a123456',
+	// 'database' => 'newestap_alsahab',
+	
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -94,3 +100,4 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+

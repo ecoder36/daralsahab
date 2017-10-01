@@ -25,6 +25,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['base_url'] = 'https://clacite-mrsamer.c9users.io/projects/daralsahab/';
 
+// $config['base_url'] = 'https://www.zaqzooq.com/projects/daralsahab';
+
 /*
 |--------------------------------------------------------------------------
 | Index File
