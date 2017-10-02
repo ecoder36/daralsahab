@@ -7,7 +7,7 @@ body {
 }
 
 
-/*=====Content Styles=====*/
+/*===== Content Styles =====*/
 .content {
     background-color: white;
     margin: 30px 50px 10px 50px;
@@ -22,7 +22,7 @@ body {
     padding: 30px 50px 40px 50px;
 }
 
-/*=========Header Styles==========*/
+/*=======  Header Styles  ========*/
 .navbar {
     background-color:#303634;
     padding-top:10px;
@@ -37,6 +37,9 @@ body {
 
 #back-btn {
     background-color: white;
+    font-size: medium;
+    padding-bottom: 12px;
+    color: black;
 }
 
 
@@ -72,3 +75,4 @@ a.pagination-links{
 	display:inline;
 }
 
+/*====  Custom Pages Styles  ====*/
