@@ -23,15 +23,22 @@ $(document).ready(function() {
                 "visible": false,
                 "searchable": false
             },
-            ]
+            ],
+        responsive: {
+        details: {
+            display: $.fn.dataTable.Responsive.display.childRowImmediate
+        }
+    }
+            
     } );
+
 } );
 </script>
 <style type="text/css">
     th, td { text-align: center; }
 </style>
 <input name="b_print" type="button" class="btn btn-default"   onClick="printdiv('div_print');" value=" طباعة ">
-<div class="well" id="div_print"><br>
+<div class="well content" id="div_print"><br>
     <table id="example" class="display" cellspacing="0" width="100%" dir="rtl">
         <thead>
             <tr>

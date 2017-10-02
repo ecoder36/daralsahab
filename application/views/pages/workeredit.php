@@ -24,10 +24,13 @@ https://codepen.io/Rio517/pen/NPLbpP/
     </ul>
 <!-- END PAGE BREADCRUMBS -->
 
+<div class="center">
 <h2><?= $title ?></h2>
+</div>
 <?php echo form_open_multipart('worker/update'); date_default_timezone_set('Asia/Riyadh'); ?>
 	<input type="hidden" name="id" value="<?php echo $post['id']; ?>">
     <div class="row">
+      <div class="well content">
         <div class="col-md-12">
           
     		<div class="form-group">
@@ -86,7 +89,7 @@ https://codepen.io/Rio517/pen/NPLbpP/
     	     <button type="submit" class="btn btn-primary btn-block1 ">حفظ</button>
     
     	</div>
-   	
+   	 </div> <!-- well content class -->
     </div>
 </form>
 
