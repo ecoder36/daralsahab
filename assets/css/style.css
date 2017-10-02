@@ -7,21 +7,6 @@ body {
 }
 
 
-/*===== Content Styles =====*/
-.content {
-    background-color: white;
-    margin: 30px 50px 10px 50px;
-    padding: 60px 50px 10px 50px;
-    text-align: center;
-    
-}
-
-.auth-content {
-    background-color: white;
-    margin: 30px 10px 10px 10px;
-    padding: 30px 50px 40px 50px;
-}
-
 /*=======  Header Styles  ========*/
 .navbar {
     background-color:#303634;
@@ -40,6 +25,21 @@ body {
     font-size: medium;
     padding-bottom: 12px;
     color: black;
+}
+
+/*===== Content Styles =====*/
+.content {
+    background-color: white;
+    margin: 30px 50px 10px 50px;
+    padding: 60px 50px 10px 50px;
+    text-align: center;
+    
+}
+
+.auth-content {
+    background-color: white;
+    margin: 30px 10px 10px 10px;
+    padding: 30px 50px 40px 50px;
 }
 
 

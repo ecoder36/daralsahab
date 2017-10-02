@@ -23,6 +23,8 @@
       	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
       	<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
       	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+      	<script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.js"></script>
+      	<link href="//cdn.datatables.net/responsive/2.1.1/css/dataTables.responsive.css"/>
 
       	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
       	<script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js"></script>

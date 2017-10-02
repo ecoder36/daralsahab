@@ -26,16 +26,22 @@
                 "searchPlaceholder": "بحث سريع",
                 "zeroRecords": "لا يوجد معلومات"
             },
+
+    responsive: {
+        details: {
+            display: $.fn.dataTable.Responsive.display.childRowImmediate
+        }
+    }
         } );
     } );
 </script>
 <style type="text/css">
     h2, th, td { text-align: center; }
 </style>
-<div class="well">
+<div class="well content">
     
 <h2><?= $title ?></h2><br>
-<table id="example" class="display" cellspacing="0" width="100%" dir="rtl">
+<table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%" dir="rtl">
         <thead>
             <tr>
                 <th>الرقم </th>
