@@ -20,4 +20,10 @@
 	
 			$this->load->view('test', @$data);
     	}
+    	
+    	public function mainpage(){
+				$data['title'] = '  mainpage  ' ;
+	
+			$this->load->view('pages/mainpage', @$data);
+    	}
     }
