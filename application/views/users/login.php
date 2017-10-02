@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<div class="text-center">
-	<a href="index.html" class="btn btn-default btn-sm" id="back-btn"><b>
+	<a href="<?php echo base_url(); ?>" class="btn btn-default btn-sm" id="back-btn"><b>
 	     رجوع &nbsp;&nbsp;<i class="fa fa-arrow-left"></i></b></a>
 	</div>
 <?php echo form_close(); ?>
