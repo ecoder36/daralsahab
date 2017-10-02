@@ -11,13 +11,14 @@ https://codepen.io/Rio517/pen/NPLbpP/
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 <!--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>-->
 
-
+<div class="center">
 <h2><?= $title ?></h2>
-
+</div>
 
 <?php echo form_open_multipart('contact/create'); date_default_timezone_set('Asia/Riyadh'); ?>
     <div class="row">
         <div class="col-md-12">
+            <div class="well content">
     		<h1 class="text-center"> </h1>
     		<div class="form-group">
     			<label>الاسم</label> *
@@ -38,6 +39,7 @@ https://codepen.io/Rio517/pen/NPLbpP/
             	</div>
             </div>
     		<button type="submit" class="btn btn-primary btn-block">إرسال</button>
+    		</div>
     	</div>
     
     </div>
