@@ -1,3 +1,8 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     background-color: #eee;
 }
@@ -83,6 +88,9 @@ a.pagination-links{
 
 
 /* Footer Styles */
+.footer {
+	padding: 1rem;
+}
 
 .footer-bottom {
 	background: #E3E3E3;

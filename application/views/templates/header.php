@@ -29,6 +29,7 @@
       	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
       	<script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js"></script>
         <link rel="stylesheet" href="<?=  base_url('assets/css/style.css') ?>" >
+        <script type="text/javascript" src="<?=  base_url('assets/js/myscripts.js') ?>"></script>
          <style type="text/css">
             @font-face{
             font-family:'Regulara1';
@@ -64,6 +65,8 @@
     </head>
     
     <body style="font-family: 'Regulara2'; font-sizeq: 100%;" dir="rtl">
+    <!--Test JS File-->
+    <!--<button onclick="myFunction()">Try it</button>-->
     <!-- Header -->
 		<header id="header" class="alt">    
       <div class="navbar-wrapper">

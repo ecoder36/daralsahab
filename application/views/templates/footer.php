@@ -5,7 +5,7 @@
         
     <!-- FOOTER -->
     <footer>
-    <div class="footer-bottom">
+    <div class="footer footer-bottom" id="footer">
             <p> جميع الحقوق محفوظة مؤسسة التطوير المحدودة 2016. &copy; &middot; <a href="#">الخصوصية</a> &middot; <a href="#">سياسة الاستخدام</a></p>
     </div>
     <!--/.footer-bottom-->
