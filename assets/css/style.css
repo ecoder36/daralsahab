@@ -91,6 +91,7 @@ a.pagination-links{
 /* Footer Styles */
 .footer {
 	padding: 1rem;
+
 }
 
 .footer-bottom {
@@ -99,7 +100,19 @@ a.pagination-links{
 	margin-top: 20px;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	
 }
 .footer-bottom p.pull-left {
 	padding-top: 6px;
+}
+
+footer {
+	      position: absolute;
+  right: 0;
+  left: 0;
+  padding: 0px ;
+   bottom:30px;
+   height:0px;
+   width:100%;
+   
 }
