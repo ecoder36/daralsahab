@@ -103,11 +103,11 @@
       <hr class="featurette-divider">
 
       <div class="row featurette">
-        <div class="col-md-7">
+        <div class="col-md-7 col-md-push-5">
           <h2 class="featurette-heading"> هذا النص هو مثال لنص يمكن <span class="text-muted">أن يستبدل في نفس المساحة.</span></h2>
           <p class="lead">إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما تريد، النص لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد النص العربى مفيد لمصممي المواقع على وجه الخصوص، حيث يحتاج العميل فى كثير من الأحيان أن يطلع على صورة حقيقية لتصميم الموقع.</p>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-5 col-md-pull-7">
           <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image" src="<?=  base_url('assets/images/mainpage/img_0007.jpg') ?>" data-holder-rendered="true">
         </div>
       </div>
@@ -126,16 +126,32 @@
 
       <hr class="featurette-divider">
 
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading"> هذا النص هو مثال لنص يمكن <span class="text-muted">أن يستبدل في نفس المساحة.</span></h2>
-          <p class="lead">إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما تريد، النص لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد النص العربى مفيد لمصممي المواقع على وجه الخصوص، حيث يحتاج العميل فى كثير من الأحيان أن يطلع على صورة حقيقية لتصميم الموقع.</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image" src="<?=  base_url('assets/images/mainpage/img_0009.jpg') ?>" data-holder-rendered="true">
-        </div>
-      </div>
 
+      <div class="row featurette">
+
+      <section class="get-in-touch">
+         <h1 class="title">Get in touch</h1>
+         <form class="contact-form row">
+            <div class="form-field col x-50">
+               <input id="name" class="input-text js-input" type="text" required>
+               <label class="label" for="name">Name</label>
+            </div>
+            <div class="form-field col x-50">
+               <input id="email" class="input-text js-input" type="email" required>
+               <label class="label" for="email">E-mail</label>
+            </div>
+            <div class="form-field col x-100">
+               <input id="message" class="input-text js-input" type="text" required>
+               <label class="label" for="message">Message</label>
+            </div>
+            <div class="form-field col x-100 align-center">
+               <input class="submit-btn" type="submit" value="Submit">
+            </div>
+         </form>
+      </section>
+      
+      </div>
+      
       <div class="featurette-divider"></div>
  </div><!-- /.container -->
  
