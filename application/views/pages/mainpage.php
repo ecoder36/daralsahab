@@ -36,21 +36,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand nav-text pull-right" href="index.html">مؤسسة دار السحاب</a>
+              <a class="navbar-brand nav-text pull-right" href="<?php echo base_url(); ?>pages/mainpage">مؤسسة دار السحاب</a>
             </div>
             <!--id="wrapper"-->
             <div id="navbar" class="collapse navbar-collapse pull-left">
               <ul class="nav navbar-nav navbar-left">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">اضف جديد <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="app.html">Action</a></li>
-              </ul>
-              </li>
-                <li><a href="logout.html">تسجيل الخروج</a></li>
-                <li><a href="login.html">تسجيل الدخول</a></li>
-                <li><a href="contact.html">اتصل بنا</a></li>
-                <li><a href="index.html">الصفحة الرئيسية</a></li>
+                <li><a href="<?php echo base_url(); ?>contact/form">اتصل بنا</a></li>
+                <li><a href="<?php echo base_url(); ?>">تسجيل الدخول</a></li>
               </ul>
             </div><!--/.nav-collapse -->
           </div>
@@ -92,19 +84,16 @@
           <img class="img-rounded" src="<?=  base_url('assets/images/mainpage/img_0004.jpg') ?>" alt="Generic placeholder image" width="140" height="140">
           <h2></h2>
           <p>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.</p>
-          <p><a class="btn btn-default" href="#" role="button">إقرأ المزيد &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-3 col-lg-offset-1">
           <img class="img-rounded" src="<?=  base_url('assets/images/mainpage/img_0005.jpg') ?>" alt="Generic placeholder image" width="140" height="140">
           <h2></h2>
           <p>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق .</p>
-          <p><a class="btn btn-default" href="#" role="button">إقرأ المزيد &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-3 col-lg-offset-1">
           <img class="img-rounded" src="<?=  base_url('assets/images/mainpage/img_0006.jpg') ?>" alt="Generic placeholder image" width="140" height="140">
           <h2></h2>
           <p>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.</p>
-          <p><a class="btn btn-default" href="#" role="button">إقرأ المزيد &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 
@@ -171,23 +160,24 @@
                 <div class="col-md-4">
                     <h3> خارطة الموقع </h3>
                     <ul>
-                        <li> <a href="#"> Admission </a> </li>
-                        <li> <a href="#"> Academic </a> </li>
-                        <li> <a href="#"> Career </a> </li>
-                        <li> <a href="#"> Administration </a> </li>
-                        <li> <a href="#"> Notice </a> </li>
-                        <li> <a href="#"> Tender </a> </li>
-                        <li> <a href="login.php"> Teacher Login </a> </li>
+                        <li> <a href="#"> الرئيسية </a> </li>
+                        <li> <a href="#"> اتصل بنا </a> </li>
+                        <li> <a href="#"> سياسة الاستخدام </a> </li>
+                        <li> <a href="#"> الخصوصية </a> </li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <h3><a href="#"> اتصل بنا </a></h3>
-                    <ul>
-                        <li> <a href="#"> Lorem Ipsum </a> </li>
-                        <li> <a href="#"> Lorem Ipsum </a> </li>
-                        <li> <a href="#"> Lorem Ipsum </a> </li>
-                        <li> <a href="#"> Lorem Ipsum </a> </li>
-                    </ul>
+                    <address>
+                      مؤسسة دار السحاب العقارية
+                      <br>
+                      الهاتف: 05544332211
+                      <br>
+                      الايميل: example@daralsahab.com
+                      <br>
+                      العنوان: جدة - حي الحمراء
+                      <br>
+                    </address>
                 </div>
             </div>
             <!--/.row-->
@@ -198,7 +188,7 @@
 
     <div class="footer-bottom">
         <div class="container">
-            <p class="pull-left"><a href="#">Back to top</a></p>
+            <p class="pull-left"><a class="fa fa-arrow-up fa-2x" aria-hidden="true" href="#"></a></p>
             <p> جميع الحقوق محفوظة مؤسسة التطوير المحدودة 2016. &copy; &middot; <a href="#">الخصوصية</a> &middot; <a href="#">سياسة الاستخدام</a></p>
             <div class="pull-right">
                 <ul class="nav nav-pills payments">

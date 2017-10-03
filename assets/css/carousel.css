@@ -325,6 +325,19 @@ body {
 	padding-top: 6px;
 }
 
+address {
+    color: silver;
+}
+
+.fa-arrow-up {
+    color: silver;
+    border: 2px solid;
+}
+
+.fa-arrow-up:hover {
+    color: silver;
+    border: 2px solid;
+}
 /*=========================
   Icons
  ================= */
@@ -400,3 +413,4 @@ a.socialIcon:hover, .socialHoverClass {
 	-ms-transition: all 0.8s;
 	transition: all 0.8s;
 }
+
