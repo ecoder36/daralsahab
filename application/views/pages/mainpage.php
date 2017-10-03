@@ -160,8 +160,8 @@
                 <div class="col-md-4">
                     <h3> خارطة الموقع </h3>
                     <ul>
-                        <li> <a href="#"> الرئيسية </a> </li>
-                        <li> <a href="#"> اتصل بنا </a> </li>
+                        <li> <a href="<?php echo base_url(); ?>pages/mainpage"> الرئيسية </a> </li>
+                        <li> <a href="<?php echo base_url(); ?>contact/form"> اتصل بنا </a> </li>
                         <li> <a href="#"> سياسة الاستخدام </a> </li>
                         <li> <a href="#"> الخصوصية </a> </li>
                     </ul>

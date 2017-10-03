@@ -1,9 +1,8 @@
-<div class="well">
-<h1 class="text-right"><?= $title; ?></h1>
+<h1 class="text-center"><?= $title; ?></h1>
+<div class="well content">
 <?php echo form_open('users/register'); ?>
 	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
-			
+		<div class="col-md-8 col-md-offset-2">
 			<div class="form-group">
 				<label>الاسم</label>
 				<input type="text" class="form-control" value="<?php echo set_value('name'); ?>" name="name" placeholder="Name">

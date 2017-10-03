@@ -27,6 +27,9 @@
         } );
     } );
 </script>
+<div class="row">
+    <div class="well content">
+        
 <table id="example" class="display" cellspacing="0" width="100%" dir="rtl">
         <thead>
             <tr>
@@ -61,3 +64,6 @@
             <?php } endforeach; ?>
         </tbody>
 </table>
+
+    </div>
+</div>
