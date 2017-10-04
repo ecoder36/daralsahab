@@ -128,27 +128,37 @@
 
 
       <div class="row featurette">
+        <form>
+        <?php echo form_open_multipart('contact/create'); date_default_timezone_set('Asia/Riyadh'); ?>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well shadow">
+            		<h1 class="text-center"> اتصل بنا </h1>
+            		<div class="form-group">
+            			<label>الاسم</label> *
+            			<input type="text" class="form-control" <?php echo set_value('name'); ?> name="name" placeholder="الاسم">
+            		</div>
+            		<div class="form-group">
+            			<label>الجوال</label>
+            			<input type="text" class="form-control" <?php echo set_value('mobile'); ?> name="mobile" placeholder="الجوال">
+            		</div>
+            			<div class="form-group">
+            			<label>الايميل</label>
+            			<input type="email" <?php echo set_value('email'); ?> class="form-control" name="email" placeholder="الايميل">
+            		</div>
+            		<div class="col-md-12">
+                    	<div class="form-group">
+                    		<label>الرسالة</label> *
+                    		<textarea id="editor1" type="text" class="form-control" name="message" placeholder="description" rows="3"><?php echo set_value('description'); ?></textarea>
+                    	</div>
+                    </div>
+            		<button type="submit" class="btn btn-primary btn-block">إرسال</button>
+            		</div>
+            	</div>
+            
+            </div>
+        </form>
 
-      <section class="get-in-touch">
-         <h1 class="title">Get in touch</h1>
-         <form class="contact-form row">
-            <div class="form-field col x-50">
-               <input id="name" class="input-text js-input" type="text" required>
-               <label class="label" for="name">Name</label>
-            </div>
-            <div class="form-field col x-50">
-               <input id="email" class="input-text js-input" type="email" required>
-               <label class="label" for="email">E-mail</label>
-            </div>
-            <div class="form-field col x-100">
-               <input id="message" class="input-text js-input" type="text" required>
-               <label class="label" for="message">Message</label>
-            </div>
-            <div class="form-field col x-100 align-center">
-               <input class="submit-btn" type="submit" value="Submit">
-            </div>
-         </form>
-      </section>
       
       </div>
       
