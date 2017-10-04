@@ -40,6 +40,7 @@ $(document).ready(function() {
     </ul>
 <!-- END PAGE BREADCRUMBS -->
 <div class="main">
+<div class="row content">
 <input name="b_print" type="button" class="btn btn-default"   onClick="printdiv('div_print');" value=" طباعة ">
 	
 <div id="div_print"><br>
@@ -87,5 +88,6 @@ $(document).ready(function() {
     <?php endif; ?>
     	<hr>
     </div>
+</div>
 </div>
 </div>
