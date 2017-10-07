@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //$route['property/(:any)'] = 'property/view/$1';
 //$route['property/create'] = 'property/create';
 
-$route['default_controller'] = 'contact/main';
+$route['default_controller'] = 'pages/mainpage';
 // $route['default_controller'] = 'pages/view';
 //$route['(:any)'] = 'pages/view/$1'; // any ----- refere to any thing after ciblog   + $1 -----> thats represent any thing --- about coming from here
 $route['404_override'] = '';

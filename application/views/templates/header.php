@@ -84,7 +84,7 @@
               <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <!-- to activate base_url() go to config/autoload.php & go to $autoload['helper'] = array() and add 'url' ---- > $autoload['helper'] = array('url');-->
-                  <li><a href="<?php echo base_url(); ?>contact/form">اتصل بنا</a></li>
+                  <!--<li><a href="<?php //echo base_url(); ?>contact/form">اتصل بنا</a></li>-->
                   <li><a href="<?php echo base_url(); ?>">الصفحة الرئيسية</a></li>
                 </ul>
                 <?php if($this->session->userdata('logged_in_1')):?>
@@ -160,6 +160,7 @@
 </div>
  <?php endif; ?>
     <div class="container">
+       
       <?php if(validation_errors()): ?>
      <?php echo '<div class="alert alert-danger">'.validation_errors().'</div>'; ?>
       <?php endif; ?>

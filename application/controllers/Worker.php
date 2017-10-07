@@ -212,11 +212,11 @@ die();
 			}
 		
 			$post_id = $this->input->post('id');
-		
-			$this->worker_model->update_worker();
-        
-            $this->session->set_flashdata('success', 'تم تحديث البيانات بنجاح');//post_updated is an id for the message
-			redirect('worker/view/'.$post_id);
+			
+				$this->worker_model->update_worker();
+	            $this->session->set_flashdata('success', 'تم تحديث البيانات بنجاح');//post_updated is an id for the message
+				redirect('worker/view/'.$post_id);
+			
 		}
 	
 	
@@ -278,10 +278,12 @@ die();
 					$this->worker_model->delete_file($id);
 			 	}
 			 	if(count($files) == 1){
+			 		
 			 		$file = $this->worker_model->get_file($post_id);
-			 		$fid = $file['id'];
+			 		$fid = $file['f_id'];
 			 		$fname =  "noimage.jpg";
 			 		$default = "noimg";
+			 	
 			 		$this->worker_model->update_file($fid,$fname,$default);
 			 		$path_to_file = './assets/images/posts/'.$file_name ;
 					unlink($path_to_file);

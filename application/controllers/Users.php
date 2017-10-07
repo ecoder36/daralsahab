@@ -17,6 +17,10 @@
 		
 		// Log in user
 		public function login(){
+			if($this->session->userdata('logged_in_1')){
+			//	$this->session->set_flashdata('danger', 'يجب تسجيل الدخول');
+				redirect('contact/main');
+			}
 			$data['title'] = 'تسجيل الدخول';
 			$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
@@ -59,7 +63,7 @@
 			
 					// Set message
 					$this->session->set_flashdata('success', 'تم تسجيل الدخول بنجاح');
-					redirect('/');
+					redirect('Contact/main');
 				} else {
 					// Set message
 					$this->session->set_flashdata('danger', 'يوجد خطأ في تسجيل الدخول');

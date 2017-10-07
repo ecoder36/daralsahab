@@ -91,7 +91,7 @@
 			    'file' => $name,
 			    'default' => $default
 			);
-			$this->db->where('id', $id);
+			$this->db->where('f_id', $id);
 			return $this->db->update('files', $data);
 		}
 		

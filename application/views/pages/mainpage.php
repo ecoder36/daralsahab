@@ -10,14 +10,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-
-    <title>Core-Theme</title>
+    <link rel="shortcut icon" type="image/png" href="<?=  base_url('assets/images/posts/icon.jpg') ?>">
+    <title>Dar-Alsahab</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://bootswatch.com/readable/bootstrap.min.css">
     <!--Font Awesome-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    
+    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
     <link rel="stylesheet" href="<?=  base_url('assets/css/carousel.css') ?>" >
 
     </head>
@@ -41,8 +41,8 @@
             <!--id="wrapper"-->
             <div id="navbar" class="collapse navbar-collapse pull-left">
               <ul class="nav navbar-nav navbar-left">
-                <li><a href="<?php echo base_url(); ?>contact/form">اتصل بنا</a></li>
-                <li><a href="<?php echo base_url(); ?>">تسجيل الدخول</a></li>
+                <li><a href="#div1">اتصل بنا</a></li>
+                <li><a href="<?php echo base_url(); ?>users/login">تسجيل الدخول</a></li>
               </ul>
             </div><!--/.nav-collapse -->
           </div>
@@ -127,9 +127,21 @@
       <hr class="featurette-divider">
 
 
-      <div class="row featurette">
-        <form>
-        <?php echo form_open_multipart('contact/create'); date_default_timezone_set('Asia/Riyadh'); ?>
+      <div id="div1" class="row featurette">
+        
+         <?php if(validation_errors()): ?>
+     <?php echo '<div class="alert alert-danger">'.validation_errors().'</div>'; ?>
+      <?php endif; ?>
+        <!-- Flash messages -->
+      <?php if($this->session->flashdata('danger')): ?>
+        <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('danger').'</p>'; ?>
+      <?php endif; ?>
+      
+      <?php if($this->session->flashdata('success')): ?>
+        <?php echo '<p class="alert alert-success">'.$this->session->flashdata('success').'</p>'; ?>
+      <?php endif; ?>
+        
+        <?php echo form_open_multipart('contact/create#div1'); date_default_timezone_set('Asia/Riyadh'); ?>
             <div class="row">
                 <div class="col-md-12">
                     <div class="well shadow">
@@ -232,6 +244,7 @@
       </footer>
    
 
+    <script>CKEDITOR.replace( 'editor1' );</script>
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->

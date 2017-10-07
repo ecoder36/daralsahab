@@ -1,14 +1,17 @@
 <?php
 	class Contact extends CI_Controller{
 		
-		
+			public function mainpage(){
+				$data['title'] = '  mainpage  ' ;
+			$this->load->view('pages/mainpage', @$data);
+    	}
 		public function form(){	
 			$data['title'] = 'اتصل بنا' ;
 			//$data['file']  = $this->property_model->get_files();
 	     	//to check if get from database working ---- you can use print_r($data['posts']);
-			$this->load->view('templates/header', $data);
-			$this->load->view('pages/contact', $data);
-			$this->load->view('templates/footer');
+		//	$this->load->view('templates/header', $data);
+			$this->load->view('pages/mainpage', $data);
+		//	$this->load->view('templates/footer');
 		}
 		
 		public function create(){
@@ -17,14 +20,17 @@
 			$this->form_validation->set_rules('name', 'Name', 'trim|required',array('required' => 'يجب كتابة الإسم') );
 			$this->form_validation->set_rules('message', 'Message', 'trim|required',array('required' => ' يجب كتابة الرسالة') );
 			if($this->form_validation->run() === FALSE){
-	        	$this->load->view('templates/header', $data);
-				$this->load->view('pages/contact', $data);
-				$this->load->view('templates/footer');
+	        //	$this->load->view('templates/header', $data);
+				$this->load->view('pages/mainpage', $data);
+				//	redirect('pages/mainpage#div1','refresh');
+			//	$this->load->view('templates/footer');
 			}else {
 						$this->contact_model->create_contact();
 						// Set message
 						$this->session->set_flashdata('success', 'تم إرسال رسالتك بنجاح');
-						redirect('contact/form');
+						
+			//	$this->load->view('pages/mainpage#div1', $data);
+						redirect('pages/mainpage#div1');
 					}
 			}
 	   
