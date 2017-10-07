@@ -88,16 +88,19 @@
                   <li><a href="<?php echo base_url(); ?>">الصفحة الرئيسية</a></li>
                 </ul>
                 <?php if($this->session->userdata('logged_in_1')):?>
-                <ul class="nav navbar-nav navbar-right">   
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="<?php echo base_url(); ?>pages/main">البرامح </a></li>     
                    <li class="dropdown ">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">العاملين  <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                       <li class="divider"></li>
                       <li><a href="<?php echo base_url(); ?>worker/main"> معلومات العاملين </a></li>
+                  
                       <li class="divider"></li>
                       <li><a href="<?php echo base_url(); ?>worker/form">إضافة عامل</a></li>
                     </ul>
                   </li>
+                  
                   <li><a href="<?php echo base_url(); ?>contact/main">رسائل اتصل بنا </a></li>  
                 </ul>
                   <?php endif; ?>

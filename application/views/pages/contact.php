@@ -35,7 +35,7 @@ https://codepen.io/Rio517/pen/NPLbpP/
     		<div class="col-md-12">
             	<div class="form-group">
             		<label>الرسالة</label> *
-            		<textarea id="editor1" type="text" class="form-control" name="message" placeholder="description" rows="3"><?php echo set_value('description'); ?></textarea>
+            		<textarea id="editor1" type="text" class="form-control" name="message" placeholder="description" rows="3"><?php echo set_value('message'); ?></textarea>
             	</div>
             </div>
     		<button type="submit" class="btn btn-primary btn-block">إرسال</button>

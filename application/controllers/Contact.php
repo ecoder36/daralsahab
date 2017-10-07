@@ -1,18 +1,46 @@
 <?php
 	class Contact extends CI_Controller{
 		
-			public function mainpage(){
-				$data['title'] = '  mainpage  ' ;
+		public function mainpage(){
+			$data['title'] = '  mainpage  ' ;
 			$this->load->view('pages/mainpage', @$data);
     	}
+    	
 		public function form(){	
 			$data['title'] = 'اتصل بنا' ;
-			//$data['file']  = $this->property_model->get_files();
-	     	//to check if get from database working ---- you can use print_r($data['posts']);
-		//	$this->load->view('templates/header', $data);
 			$this->load->view('pages/mainpage', $data);
-		//	$this->load->view('templates/footer');
 		}
+		
+		public function mail(){	
+			$data['title'] = ' إرسال رساله ' ;
+			$usermail = $this->input->post('mail');	
+			$id = $this->input->post('id');	
+			$message = $this->input->post('message');
+			$subject = $this->input->post('subject');	
+			$this->load->library('email');
+			$this->email->set_newline("\r\n");
+			$this->email->from('info@zaqzooq.com', 'Admin Info');
+			$this->email->to($usermail);
+			//$this->email->cc('another@another-example.com');
+			//$this->email->bcc('them@their-example.com');
+			$this->email->subject($subject);
+			$this->email->message($message);
+		//	$path = $this->config->item('server_root');
+			$mail = $this->email->send();
+			
+			if($mail){
+				$this->session->set_flashdata('success', "تم إرسال رسالتك إلى $usermail بنجاح "); 
+			//	$this->session->set_flashdata('success', $usermail); 
+     			redirect('contact/view/'.$id);
+			}else{
+				$error = 	($this->email->print_debugger());
+				$this->session->set_flashdata('danger', $error); 
+     			redirect('contact/view/'.$id);
+				// show_error($this->email->print_debugger());
+				// echo "failur";
+			}
+		}
+		
 		
 		public function create(){
 	        $data['title'] = 'اتصل بنا';

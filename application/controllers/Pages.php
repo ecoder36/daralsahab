@@ -26,4 +26,12 @@
 	
 			$this->load->view('pages/mainpage', @$data);
     	}
+    		
+    	public function main(){
+			$data['title'] = '  mainpage  ' ;
+			$this->load->view('templates/header', $data);
+            $this->load->view('pages/main', $data);
+            $this->load->view('templates/footer');
+            
+    	}
     }
