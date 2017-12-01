@@ -3,11 +3,11 @@
 $(document).ready(function() {
     $('#example').DataTable( {
         "order": [[ 4, "desc" ]],
-         "ordering": false,
-         "searching": false,
-         "paging": false,
-"info": false,
-"lengthChange":false,
+        "ordering": false,
+        "searching": false,
+        "paging": false,
+        "info": false,
+        "lengthChange":false,
  //dom: 'Bfrtip',
 //buttons: [{   extend: 'print', text: '<a class="btn btn-default">Print current page</a>' }],
   //   buttons: [ 'copy', 'csv', 'print', 'colvis' ],
@@ -52,6 +52,8 @@ $(document).ready(function() {
                 <th>رقم العامل</th>
                 <th>تاريخ البطاقة</th>
                 <th>تاريخ الانشاء</th>
+                <th> جواز السفر </th>
+                <th> تاريخ انتهاء الجواز  </th>
                 <th class="dontprint">الصورة</th>
                 <th class="dontprint">المزيد</th>
             </tr>
@@ -63,6 +65,8 @@ $(document).ready(function() {
                 <td><?php echo $post['workerID']; ?></td>
                 <td><?php echo $post['idDate']; ?></td>
                 <td><?php echo $post['created_at']; ?></td>
+                <td><?php echo $post['passport_no']; ?></td>
+        		<td><?php echo $post['passport_date']; ?></td>
                 <td class="dontprint"><a class="btn btn-default" href="<?php echo base_url(); ?>worker/edit/<?php echo $post['id']; ?>">تعديل</a></td>
                 <td class="dontprint"><a class="btn-link text-danger" onclick="return confirm('هل انت متأكد من حذف معلومات <?php echo $post['name']; ?>')" href="<?php echo base_url(); ?>worker/delete/<?php echo $post['id']; ?>">حذف</a></td>
             </tr>

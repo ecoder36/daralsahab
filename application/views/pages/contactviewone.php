@@ -34,7 +34,8 @@ $(document).ready(function() {
 <!-- END PAGE BREADCRUMBS -->
 <div class="well">
 <input name="b_print" type="button" class="btn btn-default"   onClick="printdiv('div_print');" value=" طباعة ">
-<div id="div_print"><br>
+
+<div id="div_print" class="well content"><br>
     <table class="display example" cellspacing="0" width="100%" dir="rtl">
         <thead>
             <tr>

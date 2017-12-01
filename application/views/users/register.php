@@ -1,3 +1,18 @@
+
+
+<!-- BEGIN PAGE BREADCRUMBS -->
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            
+<a  href="<?php echo base_url(); ?>users/main">  عرض المستخدمين  </a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span> <?= $title ?> </span>
+        </li>
+    </ul>
+<!-- END PAGE BREADCRUMBS -->
+
 <h1 class="text-center"><?= $title; ?></h1>
 <div class="well content">
 <?php echo form_open('users/register'); ?>

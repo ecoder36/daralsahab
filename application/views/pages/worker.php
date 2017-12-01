@@ -10,11 +10,19 @@ https://codepen.io/Rio517/pen/NPLbpP/
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 <!--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>-->
+<!-- BEGIN PAGE BREADCRUMBS -->
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            
+<a  href="<?php echo base_url(); ?>worker/main">   معلومات العمال</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span> <?= $title ?> </span>
+        </li>
+    </ul>
+<!-- END PAGE BREADCRUMBS -->
 
-<div class="text-center">
-<h2><?= $title ?></h2>
-<p>أهلا وسهلا بك في الصفحة الرئيسية</p>
-</div>
 
 <?php echo form_open_multipart('worker/create'); date_default_timezone_set('Asia/Riyadh'); ?>
     <div class="row">
@@ -37,6 +45,14 @@ https://codepen.io/Rio517/pen/NPLbpP/
         		<div class="form-group">
         			<label> تاريخ الاقامة</label>
         			<input type="date" class="form-control" value="<?php echo set_value('idDate'); ?>" name="idDate" placeholder="التاريخ">
+        		</div>
+        		<div class="form-group">
+        			<label> رقم الجواز  </label>
+        			<input type="text" class="form-control" value="<?php echo set_value('passport_no'); ?>" name="passport_no" placeholder="رقم جواز السفر">
+        		</div>
+        		<div class="form-group">
+        			<label> تاريخ الجواز</label>
+        			<input type="date" class="form-control" value="<?php echo set_value('passport_date'); ?>" name="passport_date" placeholder="تاريخ انتهاء جواز السفر">
         		</div>
         		<div class="col-md-12">
                     <div class="form-group">

@@ -63,7 +63,7 @@
 			
 					// Set message
 					$this->session->set_flashdata('success', 'تم تسجيل الدخول بنجاح');
-					redirect('Contact/main');
+					redirect('pages/main');
 				} else {
 					// Set message
 					$this->session->set_flashdata('danger', 'يوجد خطأ في تسجيل الدخول');

@@ -13,6 +13,8 @@
 			    'mobile'   => $this->input->post('mobile'),
 			    'workerID' => $this->input->post('workerID'),
 			    'idDate'   => $this->input->post('idDate'),
+			    'passport_no'   => $this->input->post('passport_no'),
+			    'passport_date'   => $this->input->post('passport_date'),
 			    
 			    
 			//	'slug' => $slug, // i keep it to learn how to use variable
@@ -107,7 +109,8 @@
 			    'mobile'   => $this->input->post('mobile'),
 			    'workerID' => $this->input->post('workerID'),
 			    'idDate'   => $this->input->post('idDate'),
-				
+				'passport_no'   => $this->input->post('passport_no'),
+			    'passport_date'   => $this->input->post('passport_date'),
 			);
 			$this->db->where('id', $this->input->post('id'));
 			return $this->db->update('worker', $data);

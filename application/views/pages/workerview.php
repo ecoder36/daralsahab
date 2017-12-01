@@ -19,9 +19,9 @@ $(document).ready(function() {
             },
         "columnDefs": [
             {
-                "targets": [ 4 ],
-                "visible": false,
-                "searchable": false
+              //  "targets": [ 4 ],
+              //  "visible": false,
+              //  "searchable": false
             },
             ],
         responsive: {
@@ -38,7 +38,11 @@ $(document).ready(function() {
     th, td { text-align: center; }
 </style>
 <input name="b_print" type="button" class="btn btn-default"   onClick="printdiv('div_print');" value=" طباعة ">
-<div class="well content" id="div_print"><br>
+
+<a class="btn btn-success" href="<?php echo base_url(); ?>worker/form">إضافة عامل</a>
+<div class="well content">
+
+    <div id="div_print">
     <table id="example" class="display" cellspacing="0" width="100%" dir="rtl">
         <thead>
             <tr>
@@ -46,7 +50,9 @@ $(document).ready(function() {
                 <th>الجوال</th>
                 <th>رقم العامل</th>
                 <th>تاريخ البطاقة</th>
-                <th>تاريخ الانشاء</th>
+                <th> الأيام  </th>
+                <th> جواز السفر </th>
+                <th> تاريخ انتهاء الجواز  </th>
                 <th>الصورة</th>
                 <th class="dontprint">المزيد</th>
             </tr>
@@ -60,23 +66,29 @@ $(document).ready(function() {
 				<?php 
 				//	$bd =  substr($property['created_at'], 0, 10); 
 					$bd =  $property['idDate'] ; 
-					$now = Date('d-m-Y H:i:s') ; 
+					$now = Date('d-m-Y') ; 
                     $datetime1 = new DateTime($bd);$datetime2 = new DateTime($now);
                     $interval55 = $datetime1->diff($datetime2);
                     //$since = $interval55->format('%a Days %h Hours %i Minute %m monthes ');
                     $dayes = $interval55->format('%a');
                 ?>
-                <?php if($dayes >= 360){ ?>  
+                <?php if($dayes >= 360){  ?>  
                 <td width="150" bgcolor="red"><?php echo $property['idDate']; ?></td>
         	    <td width="150" bgcolor="red"><?php echo  $dayes ; ?></td>
+        	    <?php  }elseif( 330 <= $dayes && $dayes < 360){ ?> 
+        	     <td width="150" bgcolor="yellow"><?php echo $property['idDate']; ?></td>
+        	     <td width="150" bgcolor="yellow"><?php echo  $dayes ; ?></td>
         		<?php }else{ ?>  
-        		<td width="150" ><?php echo $property['idDate']; ?></td>
-        		<td width="150" ><?php echo  $dayes ; ?></td>
+        		<td width="150" bgcolor="green"><?php echo $property['idDate']; ?></td>
+        		<td width="150" bgcolor="green"><?php echo  $dayes ; ?></td>
         		<?php } ?>
+        		<td><?php echo $property['passport_no']; ?></td>
+        		<td><?php echo $property['passport_date']; ?></td>
                 <td width="121"><img height="122" class="post-thumb" src="<?php echo base_url(); ?>assets/images/posts/<?php if($property['default'] == 'notdef' || $property['file']!=NULL){ echo $property['file']; }else{echo 'noimage.jpg'; } ?>"></td>
                 <td class="dontprint"><p><a class="btn btn-default btn-sm" href="<?php echo base_url('/worker/view/'.$property['id'].'/'.url_title(mb_substr($property['name'], 0, 12))); ?>"> قراءة المزيد </a></p></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
     </table>
+    </div>
 </div>

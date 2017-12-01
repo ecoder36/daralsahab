@@ -10,11 +10,13 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
+        <!--<link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">-->
+        <link rel="stylesheet" href="https://bootswatch.com/3/flatly/bootstrap.min.css">
         <!--<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>-->
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
         
         
@@ -59,9 +61,51 @@
         window.print();
         document.body.innerHTML = oldstr;
         return false;
- 
         }
       </script>
+   
+
+<style type="text/css">
+
+    .page {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 20mm;
+        margin: 10mm auto;
+        border: 1px #D3D3D3 solid;
+        border-radius: 5px;
+        background: white;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+    }
+    @page {
+        size: A4;
+        margin: 0;
+       
+    }
+     @media print {
+        html, body {
+            width: 210mm;
+            height: 297mm; 
+            margin-right:60;
+            margin-left:30;
+            margin-top:5;
+        }
+        .page {
+           width: 210mm;
+            height: 297mm;   
+            margin: 10;
+            border: initial;
+            border-radius: initial;
+            width: initial;
+            min-height: initial;
+            box-shadow: initial;
+            background: initial;
+            page-break-after: always;
+        }
+    }
+    
+</style>
     </head>
     
     <body style="font-family: 'Regulara2'; font-sizeq: 100%;" dir="rtl">
@@ -85,11 +129,12 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- to activate base_url() go to config/autoload.php & go to $autoload['helper'] = array() and add 'url' ---- > $autoload['helper'] = array('url');-->
                   <!--<li><a href="<?php //echo base_url(); ?>contact/form">اتصل بنا</a></li>-->
-                  <li><a href="<?php echo base_url(); ?>">الصفحة الرئيسية</a></li>
+                  <li><a href="<?php echo base_url(); ?>pages/main">الصفحة الرئيسية</a></li>
                 </ul>
                 <?php if($this->session->userdata('logged_in_1')):?>
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a href="<?php echo base_url(); ?>pages/main">البرامح </a></li>     
+                  <li><a href="<?php echo base_url(); ?>"> صفحة الموقع </a></li>     
+                  <li><a href="<?php echo base_url(); ?>contracts">العقار </a></li>     
                    <li class="dropdown ">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">العاملين  <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">

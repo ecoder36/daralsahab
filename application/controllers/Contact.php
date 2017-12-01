@@ -19,7 +19,7 @@
 			$subject = $this->input->post('subject');	
 			$this->load->library('email');
 			$this->email->set_newline("\r\n");
-			$this->email->from('info@zaqzooq.com', 'Admin Info');
+			$this->email->from('Admin');
 			$this->email->to($usermail);
 			//$this->email->cc('another@another-example.com');
 			//$this->email->bcc('them@their-example.com');

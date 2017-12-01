@@ -50,8 +50,15 @@ https://codepen.io/Rio517/pen/NPLbpP/
     			<input type="date" class="form-control" value="<?php echo $post['idDate']; ?>" name="idDate" placeholder="التاريخ"><?php echo $post['idDate']; ?>
     		</div>
     	</div>
-    	
-    	
+    		<div class="form-group">
+    			<label> رقم الجواز  </label>
+    			<input type="text" class="form-control" value="<?php echo $post['passport_no']; ?>" name="passport_no" placeholder="رقم جواز السفر">
+    		</div>
+    		<div class="form-group">
+    			<label> تاريخ الجواز</label>
+    			<input type="date" class="form-control" value="<?php echo $post['passport_date']; ?>" name="passport_date" placeholder="تاريخ انتهاء جواز السفر">
+    		</div>
+	
     	<hr>
 <h3>المرفقات</h3>
 <?php  if($files) : ?>
@@ -126,7 +133,6 @@ https://codepen.io/Rio517/pen/NPLbpP/
               <?php echo form_close(); ?>
               
             </div>
-        
           </div>
         </div>
         <!-- End Modal -->

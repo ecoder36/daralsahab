@@ -28,6 +28,8 @@
     } );
 </script>
 <div class="row">
+    
+<a class="btn btn-success" href="<?php echo base_url(); ?>users/register">إضافة مستخدم</a>
     <div class="well content">
         
 <table id="example" class="display" cellspacing="0" width="100%" dir="rtl">
